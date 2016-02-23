@@ -4,15 +4,16 @@ note
 	date: "$Date$"
 	revision: "$Revision$"
 
-class
+deferred class
 	SOUND
 
-create
-	make
+inherit
+	AUDIO_LIBRARY_SHARED
 
 feature {NONE}
-	make
-		do
-			
-		end
+	sound_source:AUDIO_SOURCE
+
+feature
+	agent_play_sound:ACTION_SEQUENCE[TUPLE[source:AUDIO_SOURCE]]
+	
 end

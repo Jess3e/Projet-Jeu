@@ -9,6 +9,7 @@ class
 
 inherit
 	GAME_LIBRARY_SHARED
+	AUDIO_LIBRARY_SHARED
 
 create
 	make
@@ -32,11 +33,35 @@ feature {NONE} -- Initialization
 			m: SPIKE
 
 			-- Initialization for `Current'.
+
+			l_window_builder:GAME_WINDOW_RENDERED_BUILDER
+			l_window:GAME_WINDOW_RENDERED
 		do
 			create graphics.make
 			create physics.make
 			create audio.make
 			create network.make
+			create e.make
+			e.agent_play_sound.extend (agent play_sound)
+
+
+			
+			game_library.quit_signal_actions.extend (agent on_quit)
+
+
+
+
+			create l_window_builder
+			l_window_builder.set_title ("Game Project")
+			l_window_builder.set_dimension (1024, 768)
+			l_window_builder.set_is_position_centered (True)
+			l_window := l_window_builder.generate_window
+
+		end
+
+	play_sound(a_source:AUDIO_SOURCE)
+		do
+			a_source.play
 		end
 
 	on_quit(a_timestamp: NATURAL_32)
@@ -46,17 +71,7 @@ feature {NONE} -- Initialization
 
 feature
 	run
-		local
-			l_window_builder:GAME_WINDOW_RENDERED_BUILDER
-			l_window:GAME_WINDOW_RENDERED
 		do
-			game_library.enable_video
-			game_library.quit_signal_actions.extend (agent on_quit)
-			create l_window_builder
-			l_window_builder.set_title ("Game Project")
-			l_window_builder.set_dimension (1024, 768)
-			l_window_builder.set_is_position_centered (True)
-			l_window := l_window_builder.generate_window
 			game_library.launch
 		end
 	--allo:KEY

@@ -8,6 +8,7 @@ class
 
 inherit
 	GAME_LIBRARY_SHARED
+	AUDIO_LIBRARY_SHARED
 
 create
 	make
@@ -16,15 +17,16 @@ feature {NONE} -- Initialization
 
 	make
 		local
-				--ajouter les autres librairies ici
 			l_game_engine:detachable GAME_ENGINE
 		do
+			game_library.enable_video
+			audio_library.enable_sound
 			create l_game_engine.make
-
+			
 			l_game_engine.run
 
 			l_game_engine:=void
-				-- quitter les librairies
+			audio_library.quit_library
 			game_library.quit_library
 		end
 

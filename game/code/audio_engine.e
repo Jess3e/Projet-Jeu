@@ -13,12 +13,8 @@ create
 feature {NONE}
 	make
 		do
-			create sound.make
-			create music.make
 		end
 
 feature
-	sound: SOUND
-	music: MUSIC
 
 end
