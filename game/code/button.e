@@ -8,14 +8,24 @@ class
 	BUTTON
 
 inherit
-	SPRITE
-	
+	DRAWABLE
+		redefine
+			create_image
+		end
+
 create
-	make
+	make, make_resizable
 
 feature {NONE}
-	make
+	create_image
 		do
+			inspect
+				type
+				when 1 then
+					image := ressources_factory.start_button_image
+				else
 
+			end
 		end
+
 end

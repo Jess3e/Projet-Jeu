@@ -7,8 +7,8 @@ note
 class
 	BACKGROUND
 
-inherit
-	DRAWABLE
+--inherit
+--	DRAWABLE
 
 create
 	make
@@ -16,6 +16,6 @@ create
 feature {NONE}
 	make
 		do
-			
+
 		end
 end

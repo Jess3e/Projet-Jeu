@@ -7,7 +7,5 @@ note
 deferred class
 	SPRITE
 
-inherit
-	DRAWABLE
 
 end
