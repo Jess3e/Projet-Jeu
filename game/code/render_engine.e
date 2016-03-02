@@ -13,7 +13,8 @@ create
 feature {NONE}
 	make(a_window:GAME_WINDOW_RENDERED)
 		do
-			renderer:=a_window.renderer
+			renderer := a_window.renderer
+			window := a_window
 			create render_list.make (0)
 
 		end
@@ -36,5 +37,5 @@ feature
 
 	renderer:GAME_RENDERER
 
-
+	window:GAME_WINDOW_RENDERED
 end

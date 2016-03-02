@@ -63,6 +63,32 @@ feature
 
 	start_button_image:GAME_TEXTURE
 
+	button_sound:AUDIO_SOUND_FILE
+		local
+			l_path:PATH
+		do
+			create l_path.make_from_string (Audio_directory)
+			l_path := l_path.extended ("sound")
+			l_path := l_path.appended_with_extension (Audio_file_extension)
+			create Result.make (l_path.name)
+			if Result.is_openable then
+				Result.open
+			end
+		end
+
+	menu_music:AUDIO_SOUND_FILE
+		local
+			l_path:PATH
+		do
+			create l_path.make_from_string (Audio_directory)
+			l_path := l_path.extended ("music")
+			l_path := l_path.appended_with_extension (Audio_file_extension)
+			create Result.make (l_path.name)
+			if Result.is_openable then
+				Result.open
+			end
+		end
+
 	has_error:BOOLEAN
 
 feature {NONE} -- Implementation
@@ -89,4 +115,5 @@ feature {NONE} -- Implementation
 		ensure
 			Image_Exist: attached Result
 		end
+
 end

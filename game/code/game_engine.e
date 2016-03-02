@@ -18,7 +18,6 @@ feature {NONE} -- Initialization
 
 	make
 		local
-			e: PLAYER
 
 			l_ressources_factory:RESSOURCES_FACTORY
 
@@ -39,30 +38,30 @@ feature {NONE} -- Initialization
 			create physics.make
 			create audio.make
 			create network.make
-			create e.make
 			create menu.make(l_ressources_factory, render_engine)
-			e.agent_play_sound.extend (agent play_sound)
+
+			music := l_ressources_factory.menu_music
+
+			audio_library.sources_add
+			music_source:=audio_library.last_source_added
+			music_source.queue_sound_infinite_loop (music)
+			music_source.play
 			
-
-
+			game_library.iteration_actions.extend (agent on_iteration)
 			game_library.quit_signal_actions.extend (agent on_quit)
 
-
-
-
-
-
-		end
-
-	play_sound(a_source:AUDIO_SOURCE)
-		do
-			a_source.play
 		end
 
 	on_quit(a_timestamp: NATURAL_32)
 	do
 		game_library.stop
 	end
+
+	on_iteration(a_timestamp: NATURAL_32)
+		do
+			--audio.play_sources
+			audio_library.update
+		end
 
 feature
 	run
@@ -94,4 +93,6 @@ feature
 	network: NETWORK_ENGINE
 	menu: MENU_ENGINE
 
+	music_source: AUDIO_SOURCE
+	music: AUDIO_SOUND_FILE
 end

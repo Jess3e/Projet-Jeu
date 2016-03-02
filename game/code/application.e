@@ -26,7 +26,7 @@ feature {NONE} -- Initialization
 
 			create l_game_engine.make
 			l_game_engine.run
-			l_game_engine:=void
+			l_game_engine := void
 
 			image_file_library.quit_library
 			audio_library.quit_library
