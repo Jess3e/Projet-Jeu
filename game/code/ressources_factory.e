@@ -1,6 +1,6 @@
 note
 	description: "Summary description for {RESSOURCES_FACTORY}."
-	author: ""
+	author: "Jessee Lefebvre, inspired by Louis Marchand (https://github.com/tioui/Tic-Tac-Toes)"
 	date: "$Date$"
 	revision: "$Revision$"
 

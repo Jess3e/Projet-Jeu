@@ -11,17 +11,19 @@ inherit
 	AUDIO_LIBRARY_SHARED
 
 feature {NONE}
-	sound_source:AUDIO_SOURCE
-	sound:AUDIO_SOUND_FILE
+	source:AUDIO_SOURCE
+
+	file:AUDIO_SOUND_FILE
 
 feature
 	handle_sound
 		do
 			create agent_play_sound
 			audio_library.sources_add
-			sound_source := audio_library.last_source_added
+			source := audio_library.last_source_added
 		end
 
 	agent_play_sound:ACTION_SEQUENCE[TUPLE[source:AUDIO_SOURCE]]
+
 
 end

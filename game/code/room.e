@@ -13,11 +13,11 @@ create
 feature {NONE}
 	make
 		do
-			room_id := 1
+			id := 1
 			active := false
 
 		end
 feature
 	active: BOOLEAN
-	room_id: INTEGER
+	id: INTEGER
 end

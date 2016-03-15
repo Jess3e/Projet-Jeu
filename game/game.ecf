@@ -16,6 +16,7 @@
 		<cluster name="game" location=".\" recursive="true">
 			<file_rule>
 				<exclude>/EIFGENs$</exclude>
+				<exclude>/ressources$</exclude>
 			</file_rule>
 		</cluster>
 	</target>

@@ -13,24 +13,24 @@ create
 feature {NONE}
 	make
 		do
-			create sources_list.make (0)
+			create {ARRAYED_LIST [SOUND]} sound_list.make (0)
 		end
 
-	sources_list: ARRAYED_LIST [AUDIO_SOURCE]
-
 feature
-	play_sources
+	play_sounds
 		do
-			across sources_list as source loop
-				source.item.play
+			across sound_list as sound loop
+				--sound.item.play
 			end
 		end
 
-	add_source(source:AUDIO_SOURCE)
+	add_sound(sound:SOUND)
 		do
-			sources_list.extend (source)
+			sound_list.extend (sound)
 		end
 
-feature
+feature {NONE}
+
+	sound_list: LIST [SOUND]
 
 end
