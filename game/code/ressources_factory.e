@@ -52,16 +52,32 @@ feature {NONE}
 			-- to create default {GAME_TEXTURE}
 		do
 			if attached load_image(a_renderer, "start_button") as la_image then
-				start_button_image := la_image
+				start_button_texture := la_image
 			else
-				create start_button_image.make_not_lockable (a_renderer, a_format, 1, 1)
+				create start_button_texture.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "player") as la_image then
+				player_texture := la_image
+			else
+				create player_texture.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "wall") as la_image then
+				wall_texture := la_image
+			else
+				create wall_texture.make_not_lockable (a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 		end
 
 feature
 
-	start_button_image:GAME_TEXTURE
+	start_button_texture:GAME_TEXTURE
+
+	player_texture:GAME_TEXTURE
+
+	wall_texture:GAME_TEXTURE
 
 	button_sound:AUDIO_SOUND_FILE
 		local

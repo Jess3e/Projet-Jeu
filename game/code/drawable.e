@@ -8,46 +8,36 @@ note
 deferred class
 	DRAWABLE
 
-feature
-	make(a_renderer:GAME_RENDERER; a_ressources_factory:RESSOURCES_FACTORY; a_x, a_y, a_type:INTEGER_32)
+feature {NONE}
+	make(a_x, a_y:INTEGER_32; a_texture:GAME_TEXTURE)
 		do
-			renderer := a_renderer
-			ressources_factory := a_ressources_factory
 			x := a_x
 			y := a_y
-			type := a_type
-			create_image
-			if attached image as l_image then
-				width := l_image.width
-				height := l_image.height
+			texture := a_texture
+			if attached texture as l_texture then
+				width := l_texture.width
+				height := l_texture.height
 			end
 		end
 
-	make_resizable(a_renderer:GAME_RENDERER; a_ressources_factory:RESSOURCES_FACTORY; a_x, a_y , a_width, a_height, a_type:INTEGER_32)
+	make_resizable(a_x, a_y , a_width, a_height:INTEGER_32; a_texture:GAME_TEXTURE)
 		do
-			renderer := a_renderer
-			ressources_factory := a_ressources_factory
 			x := a_x
 			y := a_y
 			width := a_width
 			height := a_height
-			type := a_type
-			create_image
+			texture := a_texture
 		end
 
-	draw
+feature
+	draw(a_renderer:GAME_RENDERER)
 		do
-			if attached image as l_image then
-				renderer.draw_sub_texture_with_scale (
-										l_image, 0, 0, l_image.width, l_image.height,
+			if attached texture as l_texture then
+				a_renderer.draw_sub_texture_with_scale (
+										l_texture, 0, 0, l_texture.width, l_texture.height,
 										x, y, width, height
 									)
 			end
-		end
-
-	create_image
-		do
-			image := void
 		end
 
 feature
@@ -59,13 +49,7 @@ feature
 
 	height:INTEGER_32
 
-	type:INTEGER_32
-
 feature {NONE}
-	image:detachable GAME_TEXTURE
-
-	ressources_factory:RESSOURCES_FACTORY
-
-	renderer:GAME_RENDERER
+	texture:detachable GAME_TEXTURE
 
 end

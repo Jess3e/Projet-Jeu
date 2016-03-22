@@ -7,15 +7,18 @@ note
 class
 	BACKGROUND
 
---inherit
---	DRAWABLE
+inherit
+	DRAWABLE
+		rename
+			make as make_drawable
+		end
 
 create
 	make
 
 feature {NONE}
-	make
+	make(a_window_width, a_window_height:INTEGER_32)
 		do
-
+			--make_resizable()
 		end
 end

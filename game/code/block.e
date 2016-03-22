@@ -8,6 +8,6 @@ deferred class
 	BLOCK
 
 inherit
-	SPRITE
+	DRAWABLE
 
 end

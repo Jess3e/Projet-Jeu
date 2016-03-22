@@ -25,7 +25,7 @@ feature
 	render
 		do
 			across render_list as drawable loop
-				drawable.item.draw
+				drawable.item.draw(renderer)
 			end
 			renderer.present
 		end

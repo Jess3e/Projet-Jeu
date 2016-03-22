@@ -1,11 +1,10 @@
 note
-	description: "Summary description for {SPRITE}."
+	description: "Summary description for {MENU}."
 	author: ""
 	date: "$Date$"
 	revision: "$Revision$"
 
 deferred class
-	SPRITE
-
+	MENU
 
 end

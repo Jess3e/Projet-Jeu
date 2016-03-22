@@ -35,18 +35,20 @@ feature {NONE} -- Initialization
 			create render_engine.make(l_window)
 
 			create l_ressources_factory.make(l_window.renderer, l_window.pixel_format)
+
+			create context.make(l_window.renderer, l_window, l_ressources_factory)
+
 			create physics.make
 			create audio.make
 			create network.make
-			create menu.make(l_ressources_factory, render_engine)
+			create main_menu.make(context, render_engine)
 
-			music := l_ressources_factory.menu_music
 
-			audio_library.sources_add
-			music_source:=audio_library.last_source_added
-			music_source.queue_sound_infinite_loop (music)
-			music_source.play
-			
+--			audio_library.sources_add
+--			music_source:=audio_library.last_source_added
+--			music_source.queue_sound_infinite_loop (music)
+--			music_source.play
+
 			game_library.iteration_actions.extend (agent on_iteration)
 			game_library.quit_signal_actions.extend (agent on_quit)
 
@@ -91,8 +93,7 @@ feature
 	physics: PHYSIC_ENGINE
 	audio: AUDIO_ENGINE
 	network: NETWORK_ENGINE
-	menu: MENU_ENGINE
+	main_menu: MENU_MAIN
 
-	music_source: AUDIO_SOURCE
-	music: AUDIO_SOUND_FILE
+	context: CONTEXT
 end

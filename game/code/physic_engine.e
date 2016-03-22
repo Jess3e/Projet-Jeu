@@ -13,13 +13,13 @@ create
 feature {NONE}
 	make
 		do
-			create player.make
+
 			create blocks.make (0)
 			create room.make
 		end
 
 feature
-	player: PLAYER
+
 	blocks: ARRAYED_LIST[BLOCK]
 	room: ROOM
 end

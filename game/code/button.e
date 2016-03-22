@@ -9,51 +9,43 @@ class
 
 inherit
 	DRAWABLE
-		redefine
-			create_image, make, make_resizable
+		rename
+			make as make_drawable,
+			make_resizable as make_resizable_drawable
 		end
+
 	SOUND
+		rename
+			make as make_sound
+		end
 
 create
 	make, make_resizable
 
 feature {NONE}
-	make(a_renderer:GAME_RENDERER; a_ressources_factory:RESSOURCES_FACTORY; a_x, a_y, a_type:INTEGER_32)
+	make(a_x, a_y:INTEGER_32; a_texture:GAME_TEXTURE; a_audio_file:AUDIO_SOUND_FILE)
 		do
-			Precursor(a_renderer, a_ressources_factory, a_x, a_y, a_type)
-			sound := ressources_factory.button_sound
-			handle_sound
+			make_drawable(a_x, a_y, a_texture)
+			audio_file := a_audio_file
+			make_sound
+			create agent_click_button
 		end
 
-	make_resizable(a_renderer:GAME_RENDERER; a_ressources_factory:RESSOURCES_FACTORY; a_x, a_y , a_width, a_height, a_type:INTEGER_32)
+	make_resizable(a_x, a_y , a_width, a_height:INTEGER_32; a_texture:GAME_TEXTURE; a_audio_file:AUDIO_SOUND_FILE)
 		do
-			Precursor(a_renderer, a_ressources_factory, a_x, a_y , a_width, a_height, a_type)
-			sound := ressources_factory.button_sound
-			handle_sound
-		end
-
-	create_image
-		do
-			inspect
-				type
-				when 1 then
-					image := ressources_factory.start_button_image
-				else
-
-			end
+			make_resizable_drawable(a_x, a_y , a_width, a_height, a_texture)
+			audio_file := a_audio_file
+			make_sound
+			create agent_click_button
 		end
 
 feature
-	on_click
+	on_click(a_timestamp: NATURAL_32)
 		do
-			sound_source.queue_sound(sound)
-			agent_play_sound.call(sound_source)
-			inspect
-				type
-			when 1 then
-
-			else
-
-			end
+			audio_source.queue_sound(audio_file)
+			agent_play_sound.call(audio_source)
+			agent_click_button.call (a_timestamp)
 		end
+
+	agent_click_button:ACTION_SEQUENCE [detachable TUPLE [timestamp: NATURAL_32]]
 end
