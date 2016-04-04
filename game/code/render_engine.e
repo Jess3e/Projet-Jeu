@@ -15,12 +15,12 @@ feature {NONE}
 		do
 			renderer := a_window.renderer
 			window := a_window
-			create render_list.make (0)
+			create {LINKED_LIST [DRAWABLE]} render_list.make
 
 		end
 
 feature
-	render_list: ARRAYED_LIST [DRAWABLE]
+	render_list: LIST [DRAWABLE]
 
 	render
 		do

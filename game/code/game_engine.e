@@ -41,7 +41,7 @@ feature {NONE} -- Initialization
 			create physics.make
 			create audio.make
 			create network.make
-			create main_menu.make(context, render_engine)
+			create main_menu.make(context)
 
 
 --			audio_library.sources_add

@@ -22,11 +22,9 @@ feature {NONE}
 
 	make_resizable(a_x, a_y , a_width, a_height:INTEGER_32; a_texture:GAME_TEXTURE)
 		do
-			x := a_x
-			y := a_y
+			make(a_x, a_y, a_texture)
 			width := a_width
 			height := a_height
-			texture := a_texture
 		end
 
 feature
@@ -38,6 +36,11 @@ feature
 										x, y, width, height
 									)
 			end
+		end
+
+	set_texture(a_new_texture:GAME_TEXTURE)
+		do
+			texture := a_new_texture
 		end
 
 feature

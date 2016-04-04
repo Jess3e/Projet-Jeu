@@ -51,10 +51,28 @@ feature {NONE}
 			-- Initialization of every *_image using `a_renderer' and `a_format'
 			-- to create default {GAME_TEXTURE}
 		do
-			if attached load_image(a_renderer, "start_button") as la_image then
+			if attached load_image(a_renderer, "start_button_small") as la_image then
 				start_button_texture := la_image
 			else
 				create start_button_texture.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "config_button_small") as la_image then
+				config_button_texture := la_image
+			else
+				create config_button_texture.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "highscore_button_small") as la_image then
+				ranking_button_texture := la_image
+			else
+				create ranking_button_texture.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "exit_button_small") as la_image then
+				exit_button_texture := la_image
+			else
+				create exit_button_texture.make_not_lockable (a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "player") as la_image then
@@ -69,15 +87,45 @@ feature {NONE}
 				create wall_texture.make_not_lockable (a_renderer, a_format, 1, 1)
 				has_error := True
 			end
+			if attached load_image(a_renderer, "background") as la_image then
+				background_texture := la_image
+			else
+				create background_texture.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
 		end
 
 feature
 
 	start_button_texture:GAME_TEXTURE
 
+--	start_button_texture_hovered:GAME_TEXTURE
+
+--	start_button_texture_clicked:GAME_TEXTURE
+
+	config_button_texture:GAME_TEXTURE
+
+--	config_button_texture_hovered:GAME_TEXTURE
+
+--	config_button_texture_clicked:GAME_TEXTURE
+
+	ranking_button_texture:GAME_TEXTURE
+
+--	ranking_button_texture_hovered:GAME_TEXTURE
+
+--	ranking_button_texture_clicked:GAME_TEXTURE
+
+	exit_button_texture:GAME_TEXTURE
+
+--	exit_button_texture_hovered:GAME_TEXTURE
+
+--	exit_button_texture_clicked:GAME_TEXTURE
+
 	player_texture:GAME_TEXTURE
 
 	wall_texture:GAME_TEXTURE
+
+	background_texture:GAME_TEXTURE
 
 	button_sound:AUDIO_SOUND_FILE
 		local
