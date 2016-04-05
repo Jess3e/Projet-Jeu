@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {BUTTON}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "A button with an item that can have a sound and an action when clicked."
+	author: "Jessee Lefebvre"
+	date: "2016-04-04"
+	revision: "1.0"
 
 class
 	BUTTON
@@ -22,7 +22,7 @@ inherit
 create
 	make, make_resizable
 
-feature {NONE}
+feature {NONE} -- Initialization
 	make(a_x, a_y:INTEGER_32; a_textures:TUPLE [texture, hovered_texture, clicked_texture:GAME_TEXTURE]; a_audio_file:AUDIO_SOUND_FILE)
 		do
 			make_drawable(a_x, a_y, a_textures.texture)
@@ -44,11 +44,10 @@ feature {NONE}
 			create agent_click_button
 		end
 
-feature
-
+feature -- Access
 	agent_click_button:ACTION_SEQUENCE [detachable TUPLE [timestamp: NATURAL_32]]
 
-feature {NONE}
+feature {NONE} -- Implementation
 	hovered_texture:GAME_TEXTURE
 
 	clicked_texture:GAME_TEXTURE

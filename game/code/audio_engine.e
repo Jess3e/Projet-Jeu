@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {AUDIO_ENGINE}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "An engine that manages sounds in the game."
+	author: "Jessee Lefebvre"
+	date: "2016-04-04"
+	revision: "1.0"
 
 class
 	AUDIO_ENGINE
@@ -10,17 +10,17 @@ class
 create
 	make
 
-feature {NONE}
+feature {NONE} -- Initialization
 	make
 		do
 			create {ARRAYED_LIST [SOUND]} sound_list.make (0)
 		end
 
-feature
+feature -- Access
 	play_sounds
 		do
 			across sound_list as sound loop
-				--sound.item.play
+
 			end
 		end
 
@@ -29,7 +29,7 @@ feature
 			sound_list.extend (sound)
 		end
 
-feature {NONE}
+feature {NONE} -- Implementation
 
 	sound_list: LIST [SOUND]
 

@@ -1,15 +1,15 @@
 note
-	description: "Summary description for {RESSOURCES_FACTORY}."
+	description: "A factory that is used generate ressources for the game."
 	author: "Jessee Lefebvre, inspired by Louis Marchand (https://github.com/tioui/Tic-Tac-Toes)"
-	date: "$Date$"
-	revision: "$Revision$"
+	date: "2016-04-04"
+	revision: "1.0"
 
 class
 	RESSOURCES_FACTORY
 
 create make
 
-feature {NONE}
+feature {NONE} -- Constants
 	Images_directory:READABLE_STRING_GENERAL
 		once
 			Result := "ressources/images"
@@ -40,7 +40,7 @@ feature {NONE}
 			Result := "ogg"
 		end
 
-feature {NONE}
+feature {NONE} -- Initialization
 	make(a_renderer:GAME_RENDERER; a_format:GAME_PIXEL_FORMAT_READABLE)
 		do
 			has_error := False
@@ -95,8 +95,7 @@ feature {NONE}
 			end
 		end
 
-feature
-
+feature -- Access
 	start_button_texture:GAME_TEXTURE
 
 --	start_button_texture_hovered:GAME_TEXTURE
@@ -156,7 +155,6 @@ feature
 	has_error:BOOLEAN
 
 feature {NONE} -- Implementation
-
 	load_image(a_renderer:GAME_RENDERER; a_name:READABLE_STRING_GENERAL):detachable GAME_TEXTURE
 		local
 			l_image:IMG_IMAGE_FILE

@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {GOAL}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "A {BLOCK} that the player needs to reach in order to beat a room."
+	author: "Jessee Lefebvre"
+	date: "2016-04-04"
+	revision: "1.0"
 
 class
 	GOAL

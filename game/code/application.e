@@ -1,7 +1,7 @@
 note
-	description : "test application root class"
-	date        : "$Date$"
-	revision    : "$Revision$"
+	description : "Target class for the game."
+	date        : "2016-04-04"
+	revision    : "1.0"
 
 class
 	APPLICATION

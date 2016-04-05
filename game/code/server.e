@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {SERVER}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "The server is used to host the {RANKING}."
+	author: "Jessee Lefebvre"
+	date: "2016-04-04"
+	revision: "1.0"
 
 class
 	SERVER
@@ -10,13 +10,8 @@ class
 create
 	make
 
-feature {NONE}
+feature {NONE} -- Initialization
 	make
 		do
-			create ranking.make
-		end
 
-feature
-	ranking: RANKING
-	
-end
+		end

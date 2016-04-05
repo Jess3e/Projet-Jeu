@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {RANKING}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "A class used to store the best times to beat an amount of rooms."
+	author: "Jessee Lefebvre"
+	date: "2016-04-04"
+	revision: "1.0"
 
 class
 	RANKING
@@ -10,7 +10,7 @@ class
 create
 	make
 
-feature {NONE}
+feature {NONE} -- Initialization
 	make
 		do
 

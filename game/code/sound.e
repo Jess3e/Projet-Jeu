@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {SOUND}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "Any sound that can be played."
+	author: "Jessee Lefebvre"
+	date: "2016-04-04"
+	revision: "1.0"
 
 deferred class
 	SOUND
@@ -10,12 +10,7 @@ deferred class
 inherit
 	AUDIO_LIBRARY_SHARED
 
-feature {NONE}
-	audio_source:AUDIO_SOURCE
-
-	audio_file:AUDIO_SOUND_FILE
-
-feature
+feature {NONE} -- Initialization
 	make
 		do
 			create agent_play_sound
@@ -23,7 +18,11 @@ feature
 			audio_source := audio_library.last_source_added
 		end
 
+feature -- Access
 	agent_play_sound:ACTION_SEQUENCE[TUPLE[source:AUDIO_SOURCE]]
 
+feature {NONE} -- Implementation
+	audio_source:AUDIO_SOURCE
 
+	audio_file:AUDIO_SOUND_FILE
 end

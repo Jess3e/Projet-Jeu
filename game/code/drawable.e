@@ -1,14 +1,14 @@
 note
-	description: "Summary description for {DRAWABLE}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "A class that can be drawn on screen."
+	author: "Jessee Lefebvre"
+	date: "2016-04-04"
+	revision: "1.0"
 
 
 deferred class
 	DRAWABLE
 
-feature {NONE}
+feature {NONE} -- Initialization
 	make(a_x, a_y:INTEGER_32; a_texture:GAME_TEXTURE)
 		do
 			x := a_x
@@ -27,7 +27,7 @@ feature {NONE}
 			height := a_height
 		end
 
-feature
+feature -- Access
 	draw(a_renderer:GAME_RENDERER)
 		do
 			if attached texture as l_texture then
@@ -43,7 +43,6 @@ feature
 			texture := a_new_texture
 		end
 
-feature
 	x:INTEGER_32
 
 	y:INTEGER_32
@@ -52,7 +51,7 @@ feature
 
 	height:INTEGER_32
 
-feature {NONE}
+feature {NONE} -- Implementation
 	texture:detachable GAME_TEXTURE
 
 end

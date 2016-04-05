@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {MENU_MAIN}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "A {MENU} that manages the main game screen."
+	author: "Jessee Lefebvre"
+	date: "2016-04-04"
+	revision: "1.0"
 
 class
 	MENU_MAIN
@@ -15,18 +15,14 @@ create
 	make
 
 feature {NONE}
-	make(a_context:CONTEXT)
+	make(a_context:CONTEXT) -- Initialization
 		do
 			create {ARRAYED_LIST[BUTTON]} button_list.make (3)
 
 			create start_button.make_resizable(288, 240, 192, 192, a_context.ressources_factory.start_button_texture, a_context.ressources_factory.start_button_texture, a_context.ressources_factory.start_button_texture, a_context.ressources_factory.button_sound)
-
-
-
 			create config_button.make_resizable(544, 240, 192, 192, a_context.ressources_factory.config_button_texture, a_context.ressources_factory.start_button_texture, a_context.ressources_factory.start_button_texture, a_context.ressources_factory.button_sound)
 			create ranking_button.make_resizable(288, 496, 192, 192, a_context.ressources_factory.ranking_button_texture, a_context.ressources_factory.start_button_texture, a_context.ressources_factory.start_button_texture, a_context.ressources_factory.button_sound)
 			create exit_button.make_resizable(544, 496, 192, 192, a_context.ressources_factory.exit_button_texture, a_context.ressources_factory.start_button_texture, a_context.ressources_factory.start_button_texture, a_context.ressources_factory.button_sound)
---1024, 768
 			create background.make (a_context.window.width, a_context.window.height, a_context.ressources_factory.background_texture)
 
 			button_list.extend (start_button)
@@ -41,6 +37,7 @@ feature {NONE}
 			a_context.window.mouse_motion_actions.extend (agent on_mouse_motion)
 		end
 
+feature {NONE} -- Implementation
 	on_mouse_released(a_timestamp: NATURAL_32; a_mouse_state: GAME_MOUSE_BUTTON_RELEASED_STATE; a_nb_clicks: NATURAL_8)
 		do
 			if a_mouse_state.is_left_button_released then
@@ -63,9 +60,9 @@ feature {NONE}
 			a_source.play
 		end
 
-	on_click_start_button(a_timestamp: NATURAL_32; a_audio_source:A)
+	on_click_start_button(a_timestamp: NATURAL_32; a_audio_source:AUDIO_SOURCE)
 		do
-			audio_source.queue_sound(audio_file)s
+			audio_source.queue_sound(audio_file)
 			audio_source.play
 			agent_play_sound.call(audio_source)
 			agent_click_button.call (a_timestamp)
@@ -82,8 +79,6 @@ feature {NONE}
 	background:BACKGROUND
 
 	button_list:LIST[BUTTON]
-
-feature
 
 end
 

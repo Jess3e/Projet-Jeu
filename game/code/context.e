@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {CONTEXT}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "This class is passed stores objects that are usually passed around."
+	author: "Jessee Lefebvre"
+	date: "2016-04-04"
+	revision: "1.0"
 
 class
 	CONTEXT
@@ -10,7 +10,7 @@ class
 create
 	make
 
-feature {NONE}
+feature {NONE} -- Initialization
 	make(a_renderer:GAME_RENDERER; a_window:GAME_WINDOW; a_ressources_factory:RESSOURCES_FACTORY)
 		do
 			renderer := a_renderer
@@ -18,7 +18,7 @@ feature {NONE}
 			ressources_factory := a_ressources_factory
 		end
 
-feature
+feature -- Access
 	renderer:GAME_RENDERER
 
 	window:GAME_WINDOW

@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {PLAYER}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "The main playable character of the game."
+	author: "Jessee Lefebvre"
+	date: "2016-04-04"
+	revision: "1.0"
 
 class
 	PLAYER
@@ -16,7 +16,7 @@ inherit
 create
 	make
 
-feature {NONE}
+feature {NONE} -- Initialization
 	--make
 	--	do
 	--		create agent_play_sound
@@ -25,8 +25,7 @@ feature {NONE}
 	--		file := ressources_factory.button_sound
 	--	end
 
-feature -- access
-
+feature -- Access
 	on_jump
 		do
 			--physics pour on_jump

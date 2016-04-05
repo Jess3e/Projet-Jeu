@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {NETWORK_ENGINE}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "An engine that manages networks in the game."
+	author: "Jessee Lefebvre"
+	date: "2016-04-04"
+	revision: "1.0"
 
 class
 	NETWORK_ENGINE
@@ -10,13 +10,13 @@ class
 create
 	make
 
-feature {NONE}
+feature {NONE} -- Initialization
 	make
 		do
 			create server.make
 		end
 
-feature
+feature -- Access
 	server: SERVER
 
 end

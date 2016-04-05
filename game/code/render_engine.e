@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {RENDER_ENGINE}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "An engine that renders everything in the game."
+	author: "Jessee Lefebvre"
+	date: "2016-04-04"
+	revision: "1.0"
 
 class
 	RENDER_ENGINE
@@ -10,7 +10,7 @@ class
 create
 	make
 
-feature {NONE}
+feature {NONE} -- Initialization
 	make(a_window:GAME_WINDOW_RENDERED)
 		do
 			renderer := a_window.renderer
@@ -19,11 +19,12 @@ feature {NONE}
 
 		end
 
-feature
+feature -- Access
 	render_list: LIST [DRAWABLE]
 
 	render
 		do
+			renderer.clear
 			across render_list as drawable loop
 				drawable.item.draw(renderer)
 			end

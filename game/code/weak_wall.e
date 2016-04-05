@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {WEAK_WALL}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "A {BLOCK} that breaks when the player contacts it."
+	author: "Jessee Lefebvre"
+	date: "2016-04-04"
+	revision: "1.0"
 
 class
 	WEAK_WALL

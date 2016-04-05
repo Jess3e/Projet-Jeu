@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {ARROW}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "A {BLOCK} that changes the direction that the player is moving."
+	author: "Jessee Lefebvre"
+	date: "2016-04-04"
+	revision: "1.0"
 
 class
 	ARROW
