@@ -12,14 +12,16 @@ create
 
 feature {NONE} -- Initialization
 	make
+			-- Initialization of `Current'
 		do
-
-			create blocks.make (0)
+			create {ARRAYED_LIST [BLOCK]} blocks.make (0)
 			create room.make
 		end
 
 feature -- Access
-	blocks: ARRAYED_LIST[BLOCK]
+	blocks: LIST[BLOCK]
+			-- The list of blocks to check for collisions
 
 	room: ROOM
+			-- The room that the player is currently in
 end

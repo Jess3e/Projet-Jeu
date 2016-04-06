@@ -12,6 +12,8 @@ create
 
 feature {NONE} -- Initialization
 	make
+			-- Initialization of `Current'
 		do
 
 		end
+end

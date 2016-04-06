@@ -12,15 +12,27 @@ create
 
 feature {NONE} -- Initialization
 	make
+			-- Initialization of `Current'
 		do
 			id := 1
 			active := false
-
 		end
-		
+
 feature -- Access
 	active: BOOLEAN
+		-- If room is the one currently played by the player
 
+	set_id(a_id:INTEGER)
+			-- Set the `id' of `Current' to `a_id'
+		require
+			valid_id: a_id > 0
+		do
+			id := a_id
+		ensure
+			id_set: a_id = id
+		end
+
+feature {NONE} -- Implementation
 	id: INTEGER
-
+		-- The unique id of the room
 end

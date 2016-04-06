@@ -17,6 +17,7 @@ create
 feature {NONE} -- Initialization
 
 	make
+		-- Run the game
 		local
 			l_game_engine:detachable GAME_ENGINE
 		do
@@ -25,7 +26,9 @@ feature {NONE} -- Initialization
 			image_file_library.enable_image (true, false, false)
 
 			create l_game_engine.make
-			l_game_engine.run
+			if not l_game_engine.context.ressources_factory.has_error then
+				l_game_engine.run
+			end
 			l_game_engine := void
 
 			image_file_library.quit_library

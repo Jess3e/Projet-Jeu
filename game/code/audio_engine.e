@@ -12,25 +12,20 @@ create
 
 feature {NONE} -- Initialization
 	make
+			-- Initialization of `Current'
 		do
-			create {ARRAYED_LIST [SOUND]} sound_list.make (0)
+			create {LINKED_LIST [SOUND]} sound_list.make
 		end
 
 feature -- Access
 	play_sounds
+			-- Play all the sounds in the sound_list
 		do
 			across sound_list as sound loop
-
+				-- play
 			end
 		end
 
-	add_sound(sound:SOUND)
-		do
-			sound_list.extend (sound)
-		end
-
-feature {NONE} -- Implementation
-
 	sound_list: LIST [SOUND]
-
+			-- List of all the sounds to play
 end

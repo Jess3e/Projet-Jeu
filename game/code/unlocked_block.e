@@ -10,4 +10,13 @@ class
 inherit
 	BLOCK
 
+create
+	make
+
+feature {NONE} -- Initialization
+	make
+			-- Initialization for `Current'.
+		do
+
+		end
 end

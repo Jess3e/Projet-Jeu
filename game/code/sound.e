@@ -12,6 +12,7 @@ inherit
 
 feature {NONE} -- Initialization
 	make
+			-- Initialization of `Current'
 		do
 			create agent_play_sound
 			audio_library.sources_add
@@ -21,7 +22,6 @@ feature {NONE} -- Initialization
 feature -- Access
 	agent_play_sound:ACTION_SEQUENCE[TUPLE[source:AUDIO_SOURCE]]
 
-feature {NONE} -- Implementation
 	audio_source:AUDIO_SOURCE
 
 	audio_file:AUDIO_SOUND_FILE

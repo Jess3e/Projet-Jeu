@@ -11,37 +11,45 @@ create make
 
 feature {NONE} -- Constants
 	Images_directory:READABLE_STRING_GENERAL
+			-- The directory (or sub-directory) containing the image files
 		once
 			Result := "ressources/images"
 		end
 
 	Audio_directory:READABLE_STRING_GENERAL
+			-- The directory (or sub-directory) containing the audio files
 		once
 			Result := "ressources/audio"
 		end
 
 	Fonts_directory:READABLE_STRING_GENERAL
+			-- The directory (or sub-directory) containing the font files
 		once
 			Result := "ressources/fonts"
 		end
 
 	Image_file_extension:READABLE_STRING_GENERAL
+			-- The complete extension of the image files
 		once
 			Result := "png"
 		end
 
 	Font_file_extension:READABLE_STRING_GENERAL
+			-- The complete extension of the font files
 		once
 			Result := "ttf"
 		end
 
 	Audio_file_extension:READABLE_STRING_GENERAL
+			-- The complete extension of the audio files
 		once
 			Result := "ogg"
 		end
 
 feature {NONE} -- Initialization
 	make(a_renderer:GAME_RENDERER; a_format:GAME_PIXEL_FORMAT_READABLE)
+			-- Initialization of `Current' using `a_renderer' and `a_format'
+			-- to create default {GAME_TEXTURE}
 		do
 			has_error := False
 			make_images(a_renderer, a_format)
@@ -97,36 +105,52 @@ feature {NONE} -- Initialization
 
 feature -- Access
 	start_button_texture:GAME_TEXTURE
+			-- The image texture that represent the normal start button.
 
 --	start_button_texture_hovered:GAME_TEXTURE
+			-- The image texture that represent the hovered start button.
 
 --	start_button_texture_clicked:GAME_TEXTURE
+			-- The image texture that represent the clicked start button
 
 	config_button_texture:GAME_TEXTURE
+			-- The image texture that represent the normal config button
 
 --	config_button_texture_hovered:GAME_TEXTURE
+			-- The image texture that represent the hovered config button
 
 --	config_button_texture_clicked:GAME_TEXTURE
+			-- The image texture that represent the clicked config button
 
 	ranking_button_texture:GAME_TEXTURE
+			-- The image texture that represent the normal ranking button
 
 --	ranking_button_texture_hovered:GAME_TEXTURE
+			-- The image texture that represent the hovered ranking button
 
 --	ranking_button_texture_clicked:GAME_TEXTURE
+			-- The image texture that represent the clicked ranking button
 
 	exit_button_texture:GAME_TEXTURE
+			-- The image texture that represent the normal exit button
 
 --	exit_button_texture_hovered:GAME_TEXTURE
+			-- The image texture that represent the hovered exit button
 
 --	exit_button_texture_clicked:GAME_TEXTURE
+			-- The image texture that represent the clicked exit button
 
 	player_texture:GAME_TEXTURE
+			-- The image texture that represent the player
 
 	wall_texture:GAME_TEXTURE
+			-- The image texture that represent the player
 
 	background_texture:GAME_TEXTURE
+			-- The image texture that represent the player
 
 	button_sound:AUDIO_SOUND_FILE
+			-- The audio sound file of a button click
 		local
 			l_path:PATH
 		do
@@ -140,6 +164,7 @@ feature -- Access
 		end
 
 	menu_music:AUDIO_SOUND_FILE
+			-- The audio sound file of the menu music
 		local
 			l_path:PATH
 		do
@@ -156,6 +181,7 @@ feature -- Access
 
 feature {NONE} -- Implementation
 	load_image(a_renderer:GAME_RENDERER; a_name:READABLE_STRING_GENERAL):detachable GAME_TEXTURE
+			-- Create a {GAME_TEXTURE} from an image file identified by `a_name'
 		local
 			l_image:IMG_IMAGE_FILE
 			l_path:PATH

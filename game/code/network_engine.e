@@ -12,11 +12,13 @@ create
 
 feature {NONE} -- Initialization
 	make
+			-- Initialization of `Current'
 		do
 			create server.make
 		end
 
 feature -- Access
 	server: SERVER
+			-- The server that hosts the highscores
 
 end
