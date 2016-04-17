@@ -10,12 +10,14 @@ class
 create
 	make
 
-feature {NONE} -- Initialization
-	make
+feature {NONE} -- Initialization                           SIZE : 31 x 16
+	make (a_id:INTEGER; a_block_list:LIST[BLOCK]; a_background:BACKGROUND)
 			-- Initialization of `Current'
 		do
-			id := 1
+			id := a_id
 			active := false
+			background := a_background
+			block_list := a_block_list
 		end
 
 feature -- Access
@@ -34,5 +36,11 @@ feature -- Access
 
 feature {NONE} -- Implementation
 	id: INTEGER
-		-- The unique id of the room
+		-- The unique id of `Current'
+
+	block_list: LIST[BLOCK]
+		-- The list of blocks `Current'
+
+	background: BACKGROUND
+		-- The background of `Current'
 end

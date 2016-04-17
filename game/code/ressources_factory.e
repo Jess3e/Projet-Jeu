@@ -144,10 +144,10 @@ feature -- Access
 			-- The image texture that represent the player
 
 	wall_texture:GAME_TEXTURE
-			-- The image texture that represent the player
+			-- The image texture that represent the wall
 
 	background_texture:GAME_TEXTURE
-			-- The image texture that represent the player
+			-- The image texture that represent the background
 
 	button_sound:AUDIO_SOUND_FILE
 			-- The audio sound file of a button click

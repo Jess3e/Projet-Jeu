@@ -9,5 +9,9 @@ deferred class
 
 inherit
 	DRAWABLE
+		rename
+			make as make_drawable,
+			make_resizable as make_resizable_drawable
+		end
 
 end

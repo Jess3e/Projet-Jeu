@@ -31,11 +31,23 @@ feature -- Access
 	render
 			-- Draw every objects in the render_list
 		do
-			--renderer.clear
-			across render_list as drawable loop
-				drawable.item.draw(renderer)
+			across render_list as la_drawable loop
+				la_drawable.item.draw(renderer)
 			end
 			renderer.present
+		end
+
+	clear
+			-- Clear the renderer
+		do
+			renderer.clear
+		end
+
+	update
+			-- Update the renderer
+		do
+			clear
+			render(render_list)
 		end
 
 	renderer:GAME_RENDERER

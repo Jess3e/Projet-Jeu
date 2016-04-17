@@ -19,9 +19,8 @@ feature {NONE} -- Initialization
 			x := a_x
 			y := a_y
 			texture := a_texture
-			if attached texture as l_texture then
-				width := l_texture.width
-				height := l_texture.height
+			width := a_texture.width
+			height := a_texture.height
 			end
 		ensure
 			x_set: a_x = x
@@ -83,7 +82,7 @@ feature -- Access
 			-- The height of `Current'
 
 feature {NONE} -- Implementation
-	texture:detachable GAME_TEXTURE
+	texture:GAME_TEXTURE
 		-- The texture representing `Current'
 
 invariant

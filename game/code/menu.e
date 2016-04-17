@@ -7,4 +7,15 @@ note
 deferred class
 	MENU
 
+inherit
+	GAME_LIBRARY_SHARED
+
+feature -- Access
+	button_list:LIST[BUTTON]
+			-- A list of all buttons in `Current'
+
+	background:BACKGROUND
+			-- The background of `Current'
+			
+	--actif:BOOLEAN ?
 end
