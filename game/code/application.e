@@ -30,10 +30,11 @@ feature {NONE} -- Initialization
 				l_game_engine.run
 			end
 			l_game_engine := void
-
-			image_file_library.quit_library
-			audio_library.quit_library
+			game_library.clear_all_events
+			
 			game_library.quit_library
+			audio_library.quit_library
+			image_file_library.quit_library
 		end
 
 end

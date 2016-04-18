@@ -14,12 +14,12 @@ create
 	make
 
 feature {NONE} -- Initialization
-	make(a_context:CONTEXT)
+	make(a_context:CONTEXT; a_render_engine:RENDER_ENGINE)
 			-- Initialization of `Current' with `a_context' which containst the renderer, the window and the ressources_factory
 		do
 			create {ARRAYED_LIST[BUTTON]} button_list.make (4)
 
-			create start_button.make_resizable(288, 240, 192, 192, a_context.ressources_factory.start_button_texture, a_context.ressources_factory.start_button_texture,
+			create start_button.make_resizable(288, 240, 192, 192, a_context.ressources_factory.start_button_texture, a_context.ressources_factory.start_button_texture_hovered,
 						a_context.ressources_factory.start_button_texture, a_context.ressources_factory.button_sound)
 
 			create config_button.make_resizable(544, 240, 192, 192, a_context.ressources_factory.config_button_texture, a_context.ressources_factory.start_button_texture,
@@ -33,16 +33,20 @@ feature {NONE} -- Initialization
 
 			create background.make (a_context.window.width, a_context.window.height, a_context.ressources_factory.background_texture)
 
+			render_engine := a_render_engine
+			render_engine.clear
 			button_list.extend (start_button)
-
-			background.draw (a_context.renderer)
-			start_button.draw (a_context.renderer)
-			config_button.draw (a_context.renderer)
-			ranking_button.draw (a_context.renderer)
-			exit_button.draw (a_context.renderer)
+			button_list.extend (config_button)
+			button_list.extend (ranking_button)
+			button_list.extend (exit_button)
+			render_engine.render_list.extend (background)
+			render_engine.render_list.append (button_list)
+			render_engine.render
 
 			a_context.window.mouse_button_released_actions.extend (agent on_mouse_released)
 			a_context.window.mouse_motion_actions.extend (agent on_mouse_motion)
+
+			start_button.agent_click_button.extend (agent on_click_start_button)
 		end
 
 feature {NONE} -- Implementation
@@ -50,10 +54,11 @@ feature {NONE} -- Implementation
 			-- When the user releashed the mouse button on the `window'
 		do
 			if a_mouse_state.is_left_button_released then
-				--button_list
-				if a_mouse_state.x >= start_button.x and a_mouse_state.x <= start_button.x + start_button.width then
-					if a_mouse_state.y >= start_button.y and a_mouse_state.y <= start_button.y + start_button.height then
-						on_click_start_button(a_timestamp)
+				across button_list as la_button loop
+					if a_mouse_state.x >= la_button.item.x and a_mouse_state.x <= la_button.item.x + la_button.item.width then
+						if a_mouse_state.y >= la_button.item.y and a_mouse_state.y <= la_button.item.y + la_button.item.height then
+							la_button.item.on_click
+						end
 					end
 				end
 			end
@@ -62,8 +67,23 @@ feature {NONE} -- Implementation
 
 	on_mouse_motion(a_timestamp:NATURAL_32; a_mouse_state:GAME_MOUSE_MOTION_STATE; a_delta_x, a_delta_y:INTEGER_32)
 			-- When the user moved the mouse button in the `window'
+		local
+			l_hover:BOOLEAN
 		do
-
+			across button_list as la_button loop
+				l_hover := false
+				if a_mouse_state.x >= la_button.item.x and a_mouse_state.x <= la_button.item.x + la_button.item.width then
+					if a_mouse_state.y >= la_button.item.y and a_mouse_state.y <= la_button.item.y + la_button.item.height then
+						l_hover := true
+					end
+				end
+				if l_hover then
+					la_button.item.on_mouse_in
+				else
+					la_button.item.on_mouse_out
+				end
+				render_engine.update
+			end
 		end
 
 	play_sound(a_source:AUDIO_SOURCE)
@@ -74,7 +94,7 @@ feature {NONE} -- Implementation
 			a_source.play
 		end
 
-	on_click_start_button(a_timestamp: NATURAL_32)
+	on_click_start_button
 			-- When the `start_button' is clicked
 		do
 

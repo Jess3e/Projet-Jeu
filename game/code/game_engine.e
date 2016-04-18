@@ -36,7 +36,7 @@ feature {NONE} -- Initialization
 			create physic_engine.make
 			create audio_engine.make
 			create network_engine.make
-			create main_menu.make(context)
+			create main_menu.make(context, render_engine)
 
 			game_library.iteration_actions.extend (agent on_iteration)
 			game_library.quit_signal_actions.extend (agent on_quit)

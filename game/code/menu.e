@@ -16,6 +16,9 @@ feature -- Access
 
 	background:BACKGROUND
 			-- The background of `Current'
-			
+
+	render_engine:RENDER_ENGINE
+			-- The engine that renders the window
+
 	--actif:BOOLEAN ?
 end

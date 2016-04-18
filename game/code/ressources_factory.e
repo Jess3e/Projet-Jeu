@@ -56,33 +56,10 @@ feature {NONE} -- Initialization
 		end
 
 	make_images(a_renderer:GAME_RENDERER; a_format:GAME_PIXEL_FORMAT_READABLE)
-			-- Initialization of every *_image using `a_renderer' and `a_format'
+			-- Initialization of every texture using `a_renderer' and `a_format'
 			-- to create default {GAME_TEXTURE}
 		do
-			if attached load_image(a_renderer, "start_button_small") as la_image then
-				start_button_texture := la_image
-			else
-				create start_button_texture.make_not_lockable (a_renderer, a_format, 1, 1)
-				has_error := True
-			end
-			if attached load_image(a_renderer, "config_button_small") as la_image then
-				config_button_texture := la_image
-			else
-				create config_button_texture.make_not_lockable (a_renderer, a_format, 1, 1)
-				has_error := True
-			end
-			if attached load_image(a_renderer, "highscore_button_small") as la_image then
-				ranking_button_texture := la_image
-			else
-				create ranking_button_texture.make_not_lockable (a_renderer, a_format, 1, 1)
-				has_error := True
-			end
-			if attached load_image(a_renderer, "exit_button_small") as la_image then
-				exit_button_texture := la_image
-			else
-				create exit_button_texture.make_not_lockable (a_renderer, a_format, 1, 1)
-				has_error := True
-			end
+			make_button_images(a_renderer, a_format)
 			if attached load_image(a_renderer, "player") as la_image then
 				player_texture := la_image
 			else
@@ -103,14 +80,56 @@ feature {NONE} -- Initialization
 			end
 		end
 
+	make_button_images(a_renderer:GAME_RENDERER; a_format:GAME_PIXEL_FORMAT_READABLE)
+			-- Initialization of every button texture using `a_renderer' and `a_format'
+			-- to create default {GAME_TEXTURE}
+		do
+			if attached load_image(a_renderer, "start_button_small") as la_image then
+				start_button_texture := la_image
+			else
+				create start_button_texture.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "start_button_small_hovered") as la_image then
+				start_button_texture_hovered := la_image
+			else
+				create start_button_texture_hovered.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "start_button_small_clicked") as la_image then
+				start_button_texture_clicked := la_image
+			else
+				create start_button_texture_clicked.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "config_button_small") as la_image then
+				config_button_texture := la_image
+			else
+				create config_button_texture.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "highscore_button_small") as la_image then
+				ranking_button_texture := la_image
+			else
+				create ranking_button_texture.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "exit_button_small") as la_image then
+				exit_button_texture := la_image
+			else
+				create exit_button_texture.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+		end
+
 feature -- Access
 	start_button_texture:GAME_TEXTURE
 			-- The image texture that represent the normal start button.
 
---	start_button_texture_hovered:GAME_TEXTURE
+	start_button_texture_hovered:GAME_TEXTURE
 			-- The image texture that represent the hovered start button.
 
---	start_button_texture_clicked:GAME_TEXTURE
+	start_button_texture_clicked:GAME_TEXTURE
 			-- The image texture that represent the clicked start button
 
 	config_button_texture:GAME_TEXTURE

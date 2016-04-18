@@ -47,7 +47,7 @@ feature -- Access
 			-- Update the renderer
 		do
 			clear
-			render(render_list)
+			render
 		end
 
 	renderer:GAME_RENDERER

@@ -21,7 +21,7 @@ feature {NONE} -- Initialization
 			texture := a_texture
 			width := a_texture.width
 			height := a_texture.height
-			end
+			visible := true
 		ensure
 			x_set: a_x = x
 			y_set: a_y = y
@@ -52,10 +52,12 @@ feature -- Access
 	draw(a_renderer:GAME_RENDERER)
 			-- Draw `Current' with dimension (`width'x`height') on the `a_renderer' at position (`x', `y')
 		do
-			if attached texture as l_texture then
-				a_renderer.draw_sub_texture_with_scale (
+			if visible then
+				if attached texture as l_texture then
+					a_renderer.draw_sub_texture_with_scale (
 										l_texture, 0, 0, l_texture.width, l_texture.height,
 										x, y, width, height)
+				end
 			end
 		end
 
@@ -80,6 +82,9 @@ feature -- Access
 
 	height:INTEGER_32
 			-- The height of `Current'
+
+	visible:BOOLEAN
+			-- The visibility of `Current'
 
 feature {NONE} -- Implementation
 	texture:GAME_TEXTURE
