@@ -11,7 +11,7 @@ create
 	make
 
 feature {NONE} -- Initialization
-	make(a_renderer:GAME_RENDERER; a_window:GAME_WINDOW; a_ressources_factory:RESSOURCES_FACTORY)
+	make(a_renderer:GAME_RENDERER; a_window:GAME_WINDOW; a_ressources_factory:RESSOURCES_FACTORY; a_render_engine:RENDER_ENGINE)
 			-- Initialization of `Current' using `a_renderer', `a_window' and `a_ressources_factory' to store them
 		require
 			ressources_factory_valid: not a_ressources_factory.has_error
@@ -21,10 +21,12 @@ feature {NONE} -- Initialization
 			renderer := a_renderer
 			window := a_window
 			ressources_factory := a_ressources_factory
+			render_engine := a_render_engine
 		ensure
 			renderer_set: renderer = a_renderer
 			window_set: window = a_window
 			ressources_factory_set: ressources_factory = a_ressources_factory
+			render_engine_set: render_engine = a_render_engine
 		end
 
 feature -- Access
@@ -36,4 +38,7 @@ feature -- Access
 
 	ressources_factory:RESSOURCES_FACTORY
 			-- A factory that generates a variable from a ressource
+
+	render_engine:RENDER_ENGINE
+			-- The engine that manages the rendering of the game
 end

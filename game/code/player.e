@@ -9,7 +9,9 @@ class
 
 inherit
 	DRAWABLE
-	SOUND
+		rename
+			make as make_drawable
+		end
 
 create
 	make

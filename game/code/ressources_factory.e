@@ -7,7 +7,8 @@ note
 class
 	RESSOURCES_FACTORY
 
-create make
+create
+	make
 
 feature {NONE} -- Constants
 	Images_directory:READABLE_STRING_GENERAL
@@ -78,28 +79,42 @@ feature {NONE} -- Initialization
 				create background_texture.make_not_lockable (a_renderer, a_format, 1, 1)
 				has_error := True
 			end
+			if attached load_image(a_renderer, "menu_room_overlay") as la_image then
+				menu_room_overlay_texture := la_image
+			else
+				create menu_room_overlay_texture.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "room_overlay") as la_image then
+				room_overlay_texture := la_image
+			else
+				create room_overlay_texture.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
 		end
 
 	make_button_images(a_renderer:GAME_RENDERER; a_format:GAME_PIXEL_FORMAT_READABLE)
 			-- Initialization of every button texture using `a_renderer' and `a_format'
 			-- to create default {GAME_TEXTURE}
 		do
+			make_hovered_button_images(a_renderer, a_format)
+			make_clicked_button_images(a_renderer, a_format)
 			if attached load_image(a_renderer, "start_button_small") as la_image then
 				start_button_texture := la_image
 			else
 				create start_button_texture.make_not_lockable (a_renderer, a_format, 1, 1)
 				has_error := True
 			end
-			if attached load_image(a_renderer, "start_button_small_hovered") as la_image then
-				start_button_texture_hovered := la_image
+			if attached load_image(a_renderer, "return_button") as la_image then
+				return_button_texture := la_image
 			else
-				create start_button_texture_hovered.make_not_lockable (a_renderer, a_format, 1, 1)
+				create return_button_texture.make_not_lockable (a_renderer, a_format, 1, 1)
 				has_error := True
 			end
-			if attached load_image(a_renderer, "start_button_small_clicked") as la_image then
-				start_button_texture_clicked := la_image
+			if attached load_image(a_renderer, "room_button") as la_image then
+				menu_room_button_texture := la_image
 			else
-				create start_button_texture_clicked.make_not_lockable (a_renderer, a_format, 1, 1)
+				create menu_room_button_texture.make_not_lockable (a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "config_button_small") as la_image then
@@ -122,7 +137,91 @@ feature {NONE} -- Initialization
 			end
 		end
 
+	make_hovered_button_images(a_renderer:GAME_RENDERER; a_format:GAME_PIXEL_FORMAT_READABLE)
+			-- Initialization of every button texture hovered using `a_renderer' and `a_format'
+			-- to create default {GAME_TEXTURE}
+		do
+			if attached load_image(a_renderer, "room_button_hover") as la_image then
+				menu_room_button_texture_hovered := la_image
+			else
+				create menu_room_button_texture_hovered.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "return_button_hovered") as la_image then
+				return_button_texture_hovered := la_image
+			else
+				create return_button_texture_hovered.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "start_button_small_hovered") as la_image then
+				start_button_texture_hovered := la_image
+			else
+				create start_button_texture_hovered.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "config_button_small_hovered") as la_image then
+				config_button_texture_hovered := la_image
+			else
+				create config_button_texture_hovered.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "highscore_button_small_hovered") as la_image then
+				ranking_button_texture_hovered := la_image
+			else
+				create ranking_button_texture_hovered.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "exit_button_small_hovered") as la_image then
+				exit_button_texture_hovered := la_image
+			else
+				create exit_button_texture_hovered.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+		end
+
+	make_clicked_button_images(a_renderer:GAME_RENDERER; a_format:GAME_PIXEL_FORMAT_READABLE)
+			-- Initialization of every button texture clicked using `a_renderer' and `a_format'
+			-- to create default {GAME_TEXTURE}
+		do
+			if attached load_image(a_renderer, "start_button_small_clicked") as la_image then
+				start_button_texture_clicked := la_image
+			else
+				create start_button_texture_clicked.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "config_button_small_clicked") as la_image then
+				config_button_texture_clicked := la_image
+			else
+				create config_button_texture_clicked.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "highscore_button_small_clicked") as la_image then
+				ranking_button_texture_clicked := la_image
+			else
+				create ranking_button_texture_clicked.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "exit_button_small_clicked") as la_image then
+				exit_button_texture_clicked := la_image
+			else
+				create exit_button_texture_clicked.make_not_lockable (a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+		end
+
 feature -- Access
+	return_button_texture:GAME_TEXTURE
+			-- The image texture that represent the normal return button.
+
+	return_button_texture_hovered:GAME_TEXTURE
+			-- The image texture that represent the hovered return button.
+
+	menu_room_button_texture:GAME_TEXTURE
+			-- The image texture that represent the normal room button.
+
+	menu_room_button_texture_hovered:GAME_TEXTURE
+			-- The image texture that represent the hovered room button.
+
 	start_button_texture:GAME_TEXTURE
 			-- The image texture that represent the normal start button.
 
@@ -135,28 +234,28 @@ feature -- Access
 	config_button_texture:GAME_TEXTURE
 			-- The image texture that represent the normal config button
 
---	config_button_texture_hovered:GAME_TEXTURE
+	config_button_texture_hovered:GAME_TEXTURE
 			-- The image texture that represent the hovered config button
 
---	config_button_texture_clicked:GAME_TEXTURE
+	config_button_texture_clicked:GAME_TEXTURE
 			-- The image texture that represent the clicked config button
 
 	ranking_button_texture:GAME_TEXTURE
 			-- The image texture that represent the normal ranking button
 
---	ranking_button_texture_hovered:GAME_TEXTURE
+	ranking_button_texture_hovered:GAME_TEXTURE
 			-- The image texture that represent the hovered ranking button
 
---	ranking_button_texture_clicked:GAME_TEXTURE
+	ranking_button_texture_clicked:GAME_TEXTURE
 			-- The image texture that represent the clicked ranking button
 
 	exit_button_texture:GAME_TEXTURE
 			-- The image texture that represent the normal exit button
 
---	exit_button_texture_hovered:GAME_TEXTURE
+	exit_button_texture_hovered:GAME_TEXTURE
 			-- The image texture that represent the hovered exit button
 
---	exit_button_texture_clicked:GAME_TEXTURE
+	exit_button_texture_clicked:GAME_TEXTURE
 			-- The image texture that represent the clicked exit button
 
 	player_texture:GAME_TEXTURE
@@ -167,6 +266,12 @@ feature -- Access
 
 	background_texture:GAME_TEXTURE
 			-- The image texture that represent the background
+
+	menu_room_overlay_texture:GAME_TEXTURE
+			-- The image texture that represent the menu room overlay
+
+	room_overlay_texture:GAME_TEXTURE
+			-- The image texture that represent the room overlay
 
 	button_sound:AUDIO_SOUND_FILE
 			-- The audio sound file of a button click

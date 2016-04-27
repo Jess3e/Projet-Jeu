@@ -8,81 +8,79 @@ class
 	GAME_ENGINE
 
 inherit
-	GAME_LIBRARY_SHARED
-	AUDIO_LIBRARY_SHARED
+	MENU
+		redefine
+			draw_menu,
+			set_events,
+			exit_menu
+		end
 
 create
-	make
+	make_game_engine
 
 feature {NONE} -- Initialization
-
-	make
+	make_game_engine(a_context:CONTEXT; a_room:ROOM)
 		-- Initialization for `Current'.
-		local
-			l_ressources_factory:RESSOURCES_FACTORY
-			l_window_builder:GAME_WINDOW_RENDERED_BUILDER
-			l_window:GAME_WINDOW_RENDERED
 		do
-			create l_window_builder
-
-			l_window_builder.set_title ("Game Project")
-			l_window_builder.set_dimension (1024, 768)
-			l_window_builder.set_is_position_centered (True)
-			l_window := l_window_builder.generate_window
-
-			create render_engine.make(l_window)
-			create l_ressources_factory.make(l_window.renderer, l_window.pixel_format)
-			create context.make(l_window.renderer, l_window, l_ressources_factory)
-			create physic_engine.make
-			create audio_engine.make
-			create network_engine.make
-			create main_menu.make(context, render_engine)
-
-			game_library.iteration_actions.extend (agent on_iteration)
-			game_library.quit_signal_actions.extend (agent on_quit)
+			make(a_context)
+			create mutex.make
+			create timer.make(mutex)
+			timer.launch
+			room := a_room
+			background := room.background
+			create return_button.make(32, 672, a_context.ressources_factory.return_button_texture, a_context.ressources_factory.return_button_texture_hovered,
+						a_context.ressources_factory.return_button_texture_hovered, a_context.ressources_factory.button_sound)
+			create room_overlay.make(0, 0, a_context.window.width, a_context.window.height, a_context.ressources_factory.room_overlay_texture)
+			overlay_list.extend(room_overlay)
+			button_list.extend(return_button)
+			return_button.agent_click_button.extend(agent on_click_return_button)
 		end
 
 feature -- Access
-	run
-			-- Launch the game library
-		require
-			valid_ressources_factory: not context.ressources_factory.has_error
-			valid_window: not context.window.has_error
-			valid_renderer: not context.renderer.has_error
+	exit_menu
+			-- Exit the launch loop of `Current'
 		do
-			render_engine.render
-			game_library.launch
+			timer.stop_thread
+			active := false
 		end
 
-	render_engine: RENDER_ENGINE
-			-- The engine that renders the game window
+	draw_menu
+			-- Draw everything in `Current'
+		do
+			render_engine.clear
+			render_engine.render_list.extend (background)
+			render_engine.render_list.append (overlay_list)
+			render_engine.render_list.append (button_list)
+			render_engine.render_list.append (room.block_list)
+			render_engine.render
+		end
 
-	physic_engine: PHYSIC_ENGINE
-			-- The engine that manages the physics of the game
-
-	audio_engine: AUDIO_ENGINE
-			-- The engine that manages the audio of the game
-
-	network_engine: NETWORK_ENGINE
-			-- The engine that manages the network of the game
-
-	main_menu: MENU_MAIN
-			-- The main menu of the game
-
-	context: CONTEXT
-			-- A context that stores important arguments
+	set_events(a_context:CONTEXT)
+			-- Sets the events when `Current' is the active
+		do
+			game_library.quit_signal_actions.extend (agent on_quit)
+			a_context.window.mouse_button_released_actions.extend (agent on_mouse_released)
+			a_context.window.mouse_motion_actions.extend (agent on_mouse_motion)
+		end
 
 feature {NONE} -- Implementation
-	on_quit(a_timestamp: NATURAL_32)
-			-- When the user close the window
+	on_click_return_button
+			-- When the `return_button' is clicked
 		do
-			game_library.stop
+			return_level := 2
+			stop_library
 		end
 
-	on_iteration(a_timestamp: NATURAL_32)
-			-- When the main game loop iterate
-		do
-			audio_library.update
-		end
+	room:ROOM
+			-- The current room played
 
+	room_overlay:OVERLAY
+			-- An overlay for `Current'
+
+	return_button:BUTTON
+			-- The button to return to the menu rooms
+
+	timer:TIMER
+
+	mutex:MUTEX
 end

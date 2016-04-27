@@ -17,21 +17,20 @@ feature {NONE}
 			blocks_room_1 := create_blocks_room_1
 		end
 
-feature
+feature -- Access
 	blocks_room_1:LIST[BLOCK]
 
-feature {NONE}
+feature {NONE} -- Implementation
 	create_blocks_room_1:ARRAYED_LIST[BLOCK]
 		local
 			blocks:ARRAYED_LIST[BLOCK]
 		do
 			create blocks.make (10)
-			blocks.extend (create {WALL}.make(16, 16, ressources_factory.wall_texture))
-			blocks.extend (create {WALL}.make(48, 16, ressources_factory.wall_texture))
-			blocks.extend (create {WALL}.make(16, 48, ressources_factory.wall_texture))
+			blocks.extend (create {WALL}.make(32, 32, ressources_factory.wall_texture))
+			blocks.extend (create {WALL}.make(64, 32, ressources_factory.wall_texture))
+			blocks.extend (create {WALL}.make(32, 64, ressources_factory.wall_texture))
 			Result := blocks
 		end
 
-feature {NONE}
 	ressources_factory:RESSOURCES_FACTORY
 end
