@@ -10,9 +10,10 @@ class
 inherit
 	MENU
 		redefine
-			draw_menu,
+			draw,
 			set_events,
-			exit_menu
+			exit_menu,
+			launch_library
 		end
 
 create
@@ -28,24 +29,31 @@ feature {NONE} -- Initialization
 			timer.launch
 			room := a_room
 			background := room.background
-			create return_button.make(32, 672, a_context.ressources_factory.return_button_texture, a_context.ressources_factory.return_button_texture_hovered,
-						a_context.ressources_factory.return_button_texture_hovered, a_context.ressources_factory.button_sound)
+			create return_button.make(32, 672, a_context.ressources_factory.return_button_texture, a_context.ressources_factory.return_button_texture_hovered, void, a_context.ressources_factory.button_sound)
 			create room_overlay.make(0, 0, a_context.window.width, a_context.window.height, a_context.ressources_factory.room_overlay_texture)
 			overlay_list.extend(room_overlay)
 			button_list.extend(return_button)
+			game_library.iteration_actions.extend(agent on_iteration)
 			return_button.agent_click_button.extend(agent on_click_return_button)
 		end
 
 feature -- Access
+	launch_library
+			-- Launches the library
+		do
+			game_library.launch_with_iteration_per_second(60)
+		end
+
 	exit_menu
-			-- Exit the launch loop of `Current'
+			-- Exits the launch loop of `Current'
 		do
 			timer.stop_thread
+			timer.yield
 			active := false
 		end
 
-	draw_menu
-			-- Draw everything in `Current'
+	draw
+			-- Draws everything in `Current'
 		do
 			render_engine.clear
 			render_engine.render_list.extend (background)
@@ -63,7 +71,18 @@ feature -- Access
 			a_context.window.mouse_motion_actions.extend (agent on_mouse_motion)
 		end
 
+	on_resumre
+		do
+			game_library.launch_with_iteration_per_second(60)
+		end
+
 feature {NONE} -- Implementation
+	on_iteration(a_timestamp:NATURAL_32)
+			-- When the main loop iterates
+		do
+			
+		end
+
 	on_click_return_button
 			-- When the `return_button' is clicked
 		do

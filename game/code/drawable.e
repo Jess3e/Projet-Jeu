@@ -53,9 +53,9 @@ feature -- Access
 			-- Draw `Current' with dimension (`width'x`height') on the `a_renderer' at position (`x', `y')
 		do
 			if visible then
-				if attached texture as l_texture then
+				if attached texture as la_texture then
 					a_renderer.draw_sub_texture_with_scale (
-										l_texture, 0, 0, l_texture.width, l_texture.height,
+										la_texture, 0, 0, la_texture.width, la_texture.height,
 										x, y, width, height)
 				end
 			end

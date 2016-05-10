@@ -46,8 +46,14 @@ feature -- Access
 	return_level:INTEGER_8
 			-- The level to go back when `Current' is closed
 
+	launch_library
+			-- Launches the library
+		do
+			game_library.launch
+		end
+
 	stop_library
-			-- Stops the librairy
+			-- Stops the library
 		do
 			game_library.stop
 		end
@@ -68,9 +74,10 @@ feature -- Access
 				active = false
 			loop
 				set_events(context)
-				draw_menu
-				game_library.launch
+				draw
+				launch_library
 				game_library.clear_all_events
+				on_resume
 				if attached next_menu as la_next_menu then
 					la_next_menu.launch(menu_level + 1)
 					return_level := la_next_menu.return_level
@@ -82,7 +89,7 @@ feature -- Access
 			end
 		end
 
-	draw_menu
+	draw
 			-- Draw everything in `Current'
 		do
 			render_engine.clear
@@ -100,6 +107,10 @@ feature -- Access
 			a_context.window.mouse_motion_actions.extend (agent on_mouse_motion)
 		end
 
+	on_resume
+			-- Actions to do when the library stops
+		do
+		end
 
 feature {NONE} -- Implementation
 	on_quit(a_timestamp:NATURAL_32)

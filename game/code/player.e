@@ -8,18 +8,18 @@ class
 	PLAYER
 
 inherit
-	DRAWABLE
-		rename
-			make as make_drawable
-		end
+	BLOCK
 
 create
 	make
 
 feature {NONE} -- Initialization
-	make
-			-- Initialization of `Current'
+	make(a_x, a_y:INTEGER_32; a_texture:GAME_TEXTURE)
+			-- Initialization for `Current' using `a_texture' to make an image at the position (`a_x', `a_y')
+		require
+			valid_x: a_x >= 0
+			valid_y: a_y >= 0
 		do
-
+			make_drawable(a_x, a_y, a_texture)
 		end
 end

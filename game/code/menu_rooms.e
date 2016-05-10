@@ -24,16 +24,11 @@ feature {NONE}
 			create room_factory.make(a_context.ressources_factory)
 			create background.make(a_context.window.width, a_context.window.height, a_context.ressources_factory.background_texture)
 			create menu_overlay.make(0, 0, a_context.window.width, a_context.window.height, a_context.ressources_factory.menu_room_overlay_texture)
-			create room_1_button.make(160, 365, a_context.ressources_factory.menu_room_button_texture, a_context.ressources_factory.menu_room_button_texture_hovered,
-						a_context.ressources_factory.menu_room_button_texture_hovered,a_context.ressources_factory.button_sound)
-			create room_2_button.make(352, 365, a_context.ressources_factory.menu_room_button_texture, a_context.ressources_factory.menu_room_button_texture_hovered,
-						a_context.ressources_factory.menu_room_button_texture_hovered,a_context.ressources_factory.button_sound)
-			create room_3_button.make(544, 365, a_context.ressources_factory.menu_room_button_texture, a_context.ressources_factory.menu_room_button_texture_hovered,
-						a_context.ressources_factory.menu_room_button_texture_hovered,a_context.ressources_factory.button_sound)
-			create room_4_button.make(736, 365, a_context.ressources_factory.menu_room_button_texture, a_context.ressources_factory.menu_room_button_texture_hovered,
-						a_context.ressources_factory.menu_room_button_texture_hovered,a_context.ressources_factory.button_sound)
-			create return_button.make(180, 560, a_context.ressources_factory.return_button_texture, a_context.ressources_factory.return_button_texture_hovered,
-						a_context.ressources_factory.return_button_texture_hovered, a_context.ressources_factory.button_sound)
+			create room_1_button.make(160, 365, a_context.ressources_factory.menu_room_button_texture, a_context.ressources_factory.menu_room_button_texture_hovered, void, a_context.ressources_factory.button_sound)
+			create room_2_button.make(352, 365, a_context.ressources_factory.menu_room_button_texture, a_context.ressources_factory.menu_room_button_texture_hovered, void, a_context.ressources_factory.button_sound)
+			create room_3_button.make(544, 365, a_context.ressources_factory.menu_room_button_texture, a_context.ressources_factory.menu_room_button_texture_hovered, void, a_context.ressources_factory.button_sound)
+			create room_4_button.make(736, 365, a_context.ressources_factory.menu_room_button_texture, a_context.ressources_factory.menu_room_button_texture_hovered, void, a_context.ressources_factory.button_sound)
+			create return_button.make(180, 560, a_context.ressources_factory.return_button_texture, a_context.ressources_factory.return_button_texture_hovered, void, a_context.ressources_factory.button_sound)
 			button_list.extend(room_1_button)
 			button_list.extend(room_2_button)
 			button_list.extend(room_3_button)
