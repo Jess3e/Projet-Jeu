@@ -15,10 +15,13 @@ feature {NONE}
 		do
 			ressources_factory := a_ressources_factory
 			blocks_room_1 := create_blocks_room_1
+			blocks_room_2 := create_blocks_room_2
 		end
 
 feature -- Access
 	blocks_room_1:LIST[BLOCK]
+
+	blocks_room_2:LIST[BLOCK]
 
 feature {NONE} -- Implementation
 	create_blocks_room_1:ARRAYED_LIST[BLOCK]
@@ -30,6 +33,20 @@ feature {NONE} -- Implementation
 			create l_blocks.make(230)
 			create l_block_id_list.make(480)
 			create l_room_file.make_with_name("room_1")
+			load_room_from_file(l_room_file, l_block_id_list)
+			l_blocks.append(load_blocks_from_block_list(l_block_id_list))
+			Result := l_blocks
+		end
+
+	create_blocks_room_2:ARRAYED_LIST[BLOCK]
+		local
+			l_blocks:ARRAYED_LIST[BLOCK]
+			l_block_id_list:ARRAYED_LIST[INTEGER_32]
+			l_room_file:PLAIN_TEXT_FILE
+		do
+			create l_blocks.make(146)
+			create l_block_id_list.make(480)
+			create l_room_file.make_with_name("room_2")
 			load_room_from_file(l_room_file, l_block_id_list)
 			l_blocks.append(load_blocks_from_block_list(l_block_id_list))
 			Result := l_blocks
