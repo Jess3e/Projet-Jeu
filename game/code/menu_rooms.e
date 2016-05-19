@@ -37,6 +37,7 @@ feature {NONE}
 			overlay_list.extend(menu_overlay)
 			return_button.agent_click_button.extend(agent on_click_return_button)
 			room_1_button.agent_click_button.extend(agent on_click_room_1_button)
+			room_2_button.agent_click_button.extend(agent on_click_room_2_button)
 		end
 
 feature {NONE} -- Implementation
@@ -58,7 +59,11 @@ feature {NONE} -- Implementation
 
 	on_click_room_2_button
 		do
-
+			create next_room.make(room_factory.blocks_room_2, background)
+			if attached next_room as la_room then
+				create {GAME_ENGINE} next_menu.make_game_engine(context, la_room)
+			end
+			stop_library
 		end
 
 	on_click_room_3_button

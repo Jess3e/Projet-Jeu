@@ -44,7 +44,7 @@ feature {NONE} -- Implementation
 			l_block_id_list:ARRAYED_LIST[INTEGER_32]
 			l_room_file:PLAIN_TEXT_FILE
 		do
-			create l_blocks.make(146)
+			create l_blocks.make(147)
 			create l_block_id_list.make(480)
 			create l_room_file.make_with_name("room_2")
 			load_room_from_file(l_room_file, l_block_id_list)
