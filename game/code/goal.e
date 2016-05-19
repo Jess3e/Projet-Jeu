@@ -8,18 +8,21 @@ class
 	GOAL
 
 inherit
-	BLOCK
+	ANIMATED_BLOCK
+		rename
+			make as make_animated
+		end
 
 create
 	make
 
 feature {NONE} -- Initialization
-	make(a_x, a_y:INTEGER_32; a_texture:GAME_TEXTURE)
+	make(a_x, a_y, a_animation_lenght, a_animation_index, a_frame_delay:INTEGER_32; a_texture:GAME_TEXTURE)
 			-- Initialization for `Current' using `a_texture' to make an image at the position (`a_x', `a_y')
 		require
 			valid_x: a_x >= 0
 			valid_y: a_y >= 0
 		do
-			make_drawable(a_x, a_y, a_texture)
+			make_animated(a_x, a_y, a_animation_lenght, a_animation_index, a_frame_delay, a_texture)
 		end
 end

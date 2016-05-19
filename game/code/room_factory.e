@@ -91,8 +91,8 @@ feature {NONE} -- Implementation
 					create {KEY} l_block.make(32 * (1 + ((a_position - 1) \\ 30)), 32 * (1 + ((a_position - 1) // 30)), ressources_factory.key_texture)
 				when 5 then
 					create {LOCKED_BLOCK} l_block.make(32 * (1 + ((a_position - 1) \\ 30)), 32 * (1 + ((a_position - 1) // 30)), ressources_factory.locked_block_texture)
-				--when 8 then
-					--create {GOAL} l_block.make(32 * (1 + ((a_position - 1) \\ 30)), 32 * (1 + ((a_position - 1) // 30)), ressources_factory.weak_wall_texture)
+				when 8 then
+					create {GOAL} l_block.make(32 * (1 + ((a_position - 1) \\ 30)), 32 * (1 + ((a_position - 1) // 30)), 8, 0, 3, ressources_factory.goal_animation_texture)
 				when 9 then
 					create {PLAYER} l_block.make(32 * (1 + ((a_position - 1) \\ 30)), 32 * (1 + ((a_position - 1) // 30)), ressources_factory.player_texture)
 				-- 10, 11, 12, 13: Arrows

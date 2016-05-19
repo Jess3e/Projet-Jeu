@@ -33,7 +33,6 @@ feature {NONE} -- Initialization
 			create room_overlay.make(0, 0, a_context.window.width, a_context.window.height, a_context.ressources_factory.room_overlay_texture)
 			overlay_list.extend(room_overlay)
 			button_list.extend(return_button)
-			game_library.iteration_actions.extend(agent on_iteration)
 			return_button.agent_click_button.extend(agent on_click_return_button)
 		end
 
@@ -67,6 +66,7 @@ feature -- Access
 			-- Sets the events when `Current' is the active
 		do
 			game_library.quit_signal_actions.extend (agent on_quit)
+			game_library.iteration_actions.extend(agent on_iteration)
 			a_context.window.mouse_button_released_actions.extend (agent on_mouse_released)
 			a_context.window.mouse_motion_actions.extend (agent on_mouse_motion)
 		end
@@ -80,7 +80,7 @@ feature {NONE} -- Implementation
 	on_iteration(a_timestamp:NATURAL_32)
 			-- When the main loop iterates
 		do
-			
+			context.render_engine.update
 		end
 
 	on_click_return_button

@@ -61,6 +61,12 @@ feature -- Access
 			end
 		end
 
+	redraw(a_renderer:GAME_RENDERER)
+			-- Redraw `Current' with dimension (`width'x`height') on the `a_renderer' at position (`x', `y')
+		do
+			draw(a_renderer)
+		end
+
 	set_texture(a_new_texture:GAME_TEXTURE)
 			-- Sets the `texture' of `Current' as `a_new_texture'
 		require

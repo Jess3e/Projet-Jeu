@@ -122,6 +122,12 @@ feature {NONE} -- Initialization
 				create locked_block_texture.make_not_lockable(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
+			if attached load_image(a_renderer, "goal_animation") as la_image then
+				goal_animation_texture := la_image
+			else
+				create goal_animation_texture.make_not_lockable(a_renderer, a_format, 1, 1)
+				has_error := True
+			end
 		end
 
 	make_button_images(a_renderer:GAME_RENDERER; a_format:GAME_PIXEL_FORMAT_READABLE)
@@ -306,6 +312,9 @@ feature -- Access
 
 	locked_block_texture:GAME_TEXTURE
 			-- The image texture that represents a lockey block
+
+	goal_animation_texture:GAME_TEXTURE
+			-- The animation texture that represents a goal
 
 	background_texture:GAME_TEXTURE
 			-- The image texture that represents the background

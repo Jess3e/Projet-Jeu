@@ -32,7 +32,7 @@ feature -- Access
 			-- Draw every objects in the render_list
 		do
 			across render_list as la_drawable loop
-				la_drawable.item.draw(renderer)
+				la_drawable.item.redraw(renderer)
 			end
 			renderer.present
 		end
