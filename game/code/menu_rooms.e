@@ -22,6 +22,7 @@ feature {NONE}
 		do
 			Precursor(a_context)
 			create room_factory.make(a_context.ressources_factory)
+			create game_engine.make_game_engine (a_context)
 			create background.make(a_context.window.width, a_context.window.height, a_context.ressources_factory.background_texture)
 			create menu_overlay.make(0, 0, a_context.window.width, a_context.window.height, a_context.ressources_factory.menu_room_overlay_texture)
 			create room_1_button.make(160, 365, a_context.ressources_factory.menu_room_button_texture, a_context.ressources_factory.menu_room_button_texture_hovered, void, a_context.ressources_factory.button_sound)
@@ -38,6 +39,8 @@ feature {NONE}
 			return_button.agent_click_button.extend(agent on_click_return_button)
 			room_1_button.agent_click_button.extend(agent on_click_room_1_button)
 			room_2_button.agent_click_button.extend(agent on_click_room_2_button)
+			room_3_button.agent_click_button.extend(agent on_click_room_3_button)
+			room_4_button.agent_click_button.extend(agent on_click_room_4_button)
 		end
 
 feature {NONE} -- Implementation
@@ -49,31 +52,35 @@ feature {NONE} -- Implementation
 		end
 
 	on_click_room_1_button
+			-- When the `room_1_button' is clicked
 		do
-			create next_room.make(room_factory.blocks_room_1, background)
-			if attached next_room as la_room then
-				create {GAME_ENGINE} next_menu.make_game_engine(context, la_room)
-			end
+			game_engine.set_room (room_factory.room_1)
+			next_menu := game_engine
 			stop_library
 		end
 
 	on_click_room_2_button
+			-- When the `room_2_button' is clicked
 		do
-			create next_room.make(room_factory.blocks_room_2, background)
-			if attached next_room as la_room then
-				create {GAME_ENGINE} next_menu.make_game_engine(context, la_room)
-			end
+			game_engine.set_room (room_factory.room_2)
+			next_menu := game_engine
 			stop_library
 		end
 
 	on_click_room_3_button
+			-- When the `room_3_button' is clicked
 		do
-
+			game_engine.set_room (room_factory.room_3)
+			next_menu := game_engine
+			stop_library
 		end
 
 	on_click_room_4_button
+			-- When the `room_4_button' is clicked
 		do
-
+			game_engine.set_room (room_factory.room_4)
+			next_menu := game_engine
+			stop_library
 		end
 
 	menu_overlay:OVERLAY
@@ -94,7 +101,9 @@ feature {NONE} -- Implementation
 	room_4_button:BUTTON
 			-- The button to access the room 4
 
-	next_room:detachable ROOM
-
 	room_factory:ROOM_FACTORY
+			-- The factory that creates the rooms
+
+	game_engine:GAME_ENGINE
+			-- The engine that manages the game
 end

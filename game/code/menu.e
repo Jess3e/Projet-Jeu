@@ -93,6 +93,7 @@ feature -- Access
 			-- Draw everything in `Current'
 		do
 			render_engine.clear
+			render_engine.render_list.wipe_out
 			render_engine.render_list.extend (background)
 			render_engine.render_list.append (overlay_list)
 			render_engine.render_list.append (button_list)
@@ -110,6 +111,7 @@ feature -- Access
 	on_resume
 			-- Actions to do when the library stops
 		do
+			context.render_engine.clear
 		end
 
 feature {NONE} -- Implementation

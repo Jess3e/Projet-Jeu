@@ -1,5 +1,6 @@
 note
 	description : "Target class for the game."
+	author		: "Jessee Lefebvre"
 	date        : "2016-04-04"
 	revision    : "1.0"
 
@@ -10,6 +11,7 @@ inherit
 	GAME_LIBRARY_SHARED
 	AUDIO_LIBRARY_SHARED
 	IMG_LIBRARY_SHARED
+	TEXT_LIBRARY_SHARED
 
 create
 	make
@@ -31,20 +33,25 @@ feature {NONE} -- Initialization
 			l_window_builder:GAME_WINDOW_RENDERED_BUILDER
 			l_window:GAME_WINDOW_RENDERED
 			l_render_engine:RENDER_ENGINE
+			l_physic_engine:PHYSIC_ENGINE
 			l_context:CONTEXT
 		do
 			game_library.enable_video
 			audio_library.enable_sound
+			text_library.enable_text
+			audio_library.launch_in_thread
 			image_file_library.enable_image(true, false, false)
 			l_window_builder.set_title("Blocus")
 			l_window_builder.set_dimension(1024, 768)
 			l_window_builder.set_is_position_centered(True)
 			l_window := l_window_builder.generate_window
 			create l_render_engine.make(l_window)
+			create l_physic_engine.make(30, 16)
 			create l_ressources_factory.make(l_window.renderer, l_window.pixel_format)
-			create l_context.make(l_window.renderer, l_window, l_ressources_factory, l_render_engine)
+			create l_context.make(l_window.renderer, l_window, l_ressources_factory, l_render_engine, l_physic_engine)
 			create {MENU_MAIN} l_menu_main.make(l_context)
 			l_menu_main.launch(1)
+			l_render_engine.clear
 		end
 
 

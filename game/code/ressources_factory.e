@@ -61,23 +61,85 @@ feature {NONE} -- Initialization
 			-- to create default {GAME_TEXTURE}
 		do
 			make_block_images(a_renderer, a_format)
+			make_block_animations(a_renderer, a_format)
 			make_button_images(a_renderer, a_format)
+			make_overlays(a_renderer, a_format)
 			if attached load_image(a_renderer, "background") as la_image then
 				background_texture := la_image
 			else
-				create background_texture.make_not_lockable(a_renderer, a_format, 1, 1)
+				create background_texture.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
+			if attached load_image(a_renderer, "room_background") as la_image then
+				room_background_texture := la_image
+			else
+				create room_background_texture.make(a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+		end
+
+	make_overlays(a_renderer:GAME_RENDERER; a_format:GAME_PIXEL_FORMAT_READABLE)
+			-- Initialization of every overlay texture using `a_renderer' and `a_format'
+			-- to create default {GAME_TEXTURE}
+		do
 			if attached load_image(a_renderer, "menu_room_overlay") as la_image then
 				menu_room_overlay_texture := la_image
 			else
-				create menu_room_overlay_texture.make_not_lockable(a_renderer, a_format, 1, 1)
+				create menu_room_overlay_texture.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "room_overlay") as la_image then
 				room_overlay_texture := la_image
 			else
-				create room_overlay_texture.make_not_lockable(a_renderer, a_format, 1, 1)
+				create room_overlay_texture.make(a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "death_overlay") as la_image then
+				death_overlay_texture := la_image
+			else
+				create death_overlay_texture.make(a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "room_clear_overlay") as la_image then
+				room_clear_overlay_texture := la_image
+			else
+				create room_clear_overlay_texture.make(a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+		end
+
+	make_block_animations(a_renderer:GAME_RENDERER; a_format:GAME_PIXEL_FORMAT_READABLE)
+			-- Initialization of every block animation texture using `a_renderer' and `a_format'
+			-- to create default {GAME_TEXTURE}
+		do
+			if attached load_image(a_renderer, "goal_animation") as la_image then
+				goal_animation_texture := la_image
+			else
+				create goal_animation_texture.make(a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "weak_wall_animation") as la_image then
+				weak_wall_animation_texture := la_image
+			else
+				create weak_wall_animation_texture.make(a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "roll_horizontal_animation") as la_image then
+				horizontal_animation_texture := la_image
+			else
+				create horizontal_animation_texture.make(a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "roll_vertical_animation") as la_image then
+				vertical_animation_texture := la_image
+			else
+				create vertical_animation_texture.make(a_renderer, a_format, 1, 1)
+				has_error := True
+			end
+			if attached load_image(a_renderer, "tnt_animation") as la_image then
+				tnt_animation_texture := la_image
+			else
+				create tnt_animation_texture.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 		end
@@ -86,46 +148,29 @@ feature {NONE} -- Initialization
 			-- Initialization of every block texture using `a_renderer' and `a_format'
 			-- to create default {GAME_TEXTURE}
 		do
-			if attached load_image(a_renderer, "player") as la_image then
-				player_texture := la_image
-			else
-				create player_texture.make_not_lockable(a_renderer, a_format, 1, 1)
-				has_error := True
-			end
+
 			if attached load_image(a_renderer, "wall") as la_image then
 				wall_texture := la_image
 			else
-				create wall_texture.make_not_lockable(a_renderer, a_format, 1, 1)
-				has_error := True
-			end
-			if attached load_image(a_renderer, "weak_wall") as la_image then
-				weak_wall_texture := la_image
-			else
-				create weak_wall_texture.make_not_lockable(a_renderer, a_format, 1, 1)
-				has_error := True
-			end
-			if attached load_image(a_renderer, "spike") as la_image then
-				spike_texture := la_image
-			else
-				create spike_texture.make_not_lockable(a_renderer, a_format, 1, 1)
+				create wall_texture.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "key") as la_image then
 				key_texture := la_image
 			else
-				create key_texture.make_not_lockable(a_renderer, a_format, 1, 1)
+				create key_texture.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "locked_block") as la_image then
 				locked_block_texture := la_image
 			else
-				create locked_block_texture.make_not_lockable(a_renderer, a_format, 1, 1)
+				create locked_block_texture.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
-			if attached load_image(a_renderer, "goal_animation") as la_image then
-				goal_animation_texture := la_image
+			if attached load_image(a_renderer, "arrow_right") as la_image then
+				arrow_texture := la_image
 			else
-				create goal_animation_texture.make_not_lockable(a_renderer, a_format, 1, 1)
+				create arrow_texture.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 		end
@@ -139,37 +184,37 @@ feature {NONE} -- Initialization
 			if attached load_image(a_renderer, "start_button_small") as la_image then
 				start_button_texture := la_image
 			else
-				create start_button_texture.make_not_lockable(a_renderer, a_format, 1, 1)
+				create start_button_texture.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "return_button") as la_image then
 				return_button_texture := la_image
 			else
-				create return_button_texture.make_not_lockable(a_renderer, a_format, 1, 1)
+				create return_button_texture.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "room_button") as la_image then
 				menu_room_button_texture := la_image
 			else
-				create menu_room_button_texture.make_not_lockable(a_renderer, a_format, 1, 1)
+				create menu_room_button_texture.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "config_button_small") as la_image then
 				config_button_texture := la_image
 			else
-				create config_button_texture.make_not_lockable(a_renderer, a_format, 1, 1)
+				create config_button_texture.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "highscore_button_small") as la_image then
 				ranking_button_texture := la_image
 			else
-				create ranking_button_texture.make_not_lockable(a_renderer, a_format, 1, 1)
+				create ranking_button_texture.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "exit_button_small") as la_image then
 				exit_button_texture := la_image
 			else
-				create exit_button_texture.make_not_lockable(a_renderer, a_format, 1, 1)
+				create exit_button_texture.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 		end
@@ -181,37 +226,37 @@ feature {NONE} -- Initialization
 			if attached load_image(a_renderer, "room_button_hover") as la_image then
 				menu_room_button_texture_hovered := la_image
 			else
-				create menu_room_button_texture_hovered.make_not_lockable(a_renderer, a_format, 1, 1)
+				create menu_room_button_texture_hovered.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "return_button_hovered") as la_image then
 				return_button_texture_hovered := la_image
 			else
-				create return_button_texture_hovered.make_not_lockable(a_renderer, a_format, 1, 1)
+				create return_button_texture_hovered.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "start_button_small_hovered") as la_image then
 				start_button_texture_hovered := la_image
 			else
-				create start_button_texture_hovered.make_not_lockable(a_renderer, a_format, 1, 1)
+				create start_button_texture_hovered.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "config_button_small_hovered") as la_image then
 				config_button_texture_hovered := la_image
 			else
-				create config_button_texture_hovered.make_not_lockable(a_renderer, a_format, 1, 1)
+				create config_button_texture_hovered.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "highscore_button_small_hovered") as la_image then
 				ranking_button_texture_hovered := la_image
 			else
-				create ranking_button_texture_hovered.make_not_lockable(a_renderer, a_format, 1, 1)
+				create ranking_button_texture_hovered.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "exit_button_small_hovered") as la_image then
 				exit_button_texture_hovered := la_image
 			else
-				create exit_button_texture_hovered.make_not_lockable(a_renderer, a_format, 1, 1)
+				create exit_button_texture_hovered.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 		end
@@ -223,25 +268,25 @@ feature {NONE} -- Initialization
 			if attached load_image(a_renderer, "start_button_small_clicked") as la_image then
 				start_button_texture_clicked := la_image
 			else
-				create start_button_texture_clicked.make_not_lockable(a_renderer, a_format, 1, 1)
+				create start_button_texture_clicked.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "config_button_small_clicked") as la_image then
 				config_button_texture_clicked := la_image
 			else
-				create config_button_texture_clicked.make_not_lockable(a_renderer, a_format, 1, 1)
+				create config_button_texture_clicked.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "highscore_button_small_clicked") as la_image then
 				ranking_button_texture_clicked := la_image
 			else
-				create ranking_button_texture_clicked.make_not_lockable(a_renderer, a_format, 1, 1)
+				create ranking_button_texture_clicked.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 			if attached load_image(a_renderer, "exit_button_small_clicked") as la_image then
 				exit_button_texture_clicked := la_image
 			else
-				create exit_button_texture_clicked.make_not_lockable(a_renderer, a_format, 1, 1)
+				create exit_button_texture_clicked.make(a_renderer, a_format, 1, 1)
 				has_error := True
 			end
 		end
@@ -295,29 +340,38 @@ feature -- Access
 	exit_button_texture_clicked:GAME_TEXTURE
 			-- The image texture that represents the clicked exit button
 
-	player_texture:GAME_TEXTURE
-			-- The image texture that represents the player
-
 	wall_texture:GAME_TEXTURE
 			-- The image texture that represents a wall
-
-	weak_wall_texture:GAME_TEXTURE
-			-- The image texture that represents a weak wall
-
-	spike_texture:GAME_TEXTURE
-			-- The image texture that represents a spike
 
 	key_texture:GAME_TEXTURE
 			-- The image texture that represents a key
 
 	locked_block_texture:GAME_TEXTURE
-			-- The image texture that represents a lockey block
+			-- The image texture that represents a locked block
+
+	arrow_texture:GAME_TEXTURE
+			-- The image texture that represents an arrow
+
+	tnt_animation_texture:GAME_TEXTURE
+			-- The animation texture that represents a tnt exploding
+
+	vertical_animation_texture:GAME_TEXTURE
+			-- The animation texture that represents the player rolling vertically
+
+	horizontal_animation_texture:GAME_TEXTURE
+			-- The animation texture that represents the player rolling vertically
 
 	goal_animation_texture:GAME_TEXTURE
 			-- The animation texture that represents a goal
 
+	weak_wall_animation_texture:GAME_TEXTURE
+			-- The animation texture that represents a weak wall breaking
+
 	background_texture:GAME_TEXTURE
 			-- The image texture that represents the background
+
+	room_background_texture:GAME_TEXTURE
+			-- The image texture that represents the background in a room
 
 	menu_room_overlay_texture:GAME_TEXTURE
 			-- The image texture that represents the menu room overlay
@@ -325,13 +379,35 @@ feature -- Access
 	room_overlay_texture:GAME_TEXTURE
 			-- The image texture that represents the room overlay
 
+	room_clear_overlay_texture:GAME_TEXTURE
+			-- The image texture that represents the overlay when a room is cleared
+
+	death_overlay_texture:GAME_TEXTURE
+			-- The image texture that represents the overlay when the player dies
+
+	pixelated_font(a_size:INTEGER):TEXT_FONT
+			-- The font used to show the amount of keys owned by the player
+		local
+			l_path:PATH
+		do
+			create l_path.make_from_string (Fonts_directory)
+			l_path := l_path.extended ("pixelated")
+			l_path := l_path.appended_with_extension (Font_file_extension)
+			create Result.make (l_path.name, a_size)
+			if Result.is_openable then
+				Result.open
+			end
+		ensure
+			Is_Open: Result.is_open
+		end
+
 	button_sound:AUDIO_SOUND_FILE
 			-- The audio sound file of a button click
 		local
 			l_path:PATH
 		do
 			create l_path.make_from_string(Audio_directory)
-			l_path := l_path.extended("sound")
+			l_path := l_path.extended("button_click")
 			l_path := l_path.appended_with_extension(Audio_file_extension)
 			create Result.make(l_path.name)
 			if Result.is_openable then

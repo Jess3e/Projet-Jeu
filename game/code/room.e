@@ -10,23 +10,21 @@ class
 create
 	make
 
-feature {NONE} -- Initialization                           SIZE : 30 x 16
-	make (a_block_list:LIST[BLOCK]; a_background:BACKGROUND)
+feature {NONE} -- Initialization
+
+	make (a_block_list: LIST [BLOCK])
 			-- Initialization of `Current'
 		do
 			active := false
-			background := a_background
 			block_list := a_block_list
 		end
 
 feature -- Access
+
 	active: BOOLEAN
-		-- If room is the one currently played by the player
+			-- If room is the one currently played by the player
 
-	background: BACKGROUND
-			-- The background of `Current'
-
-	block_list: LIST[BLOCK]
+	block_list: LIST [BLOCK]
 			-- The list of blocks `Current'
 
 feature {NONE} -- Implementation

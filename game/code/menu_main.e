@@ -13,6 +13,11 @@ inherit
 			make
 		end
 
+	SOUND
+		rename
+			make as make_sound
+		end
+
 create
 	make
 
@@ -21,6 +26,8 @@ feature {NONE} -- Initialization
 			-- Initialization of `Current' with `a_context' which containst the renderer, the window and the ressources_factory
 		do
 			Precursor(a_context)
+			make_sound
+			audio_file := a_context.ressources_factory.menu_music
 			create start_button.make_resizable(288, 240, 192, 192, a_context.ressources_factory.start_button_texture, a_context.ressources_factory.start_button_texture_hovered,
 						a_context.ressources_factory.start_button_texture_clicked, a_context.ressources_factory.button_sound)
 			create config_button.make_resizable(544, 240, 192, 192, a_context.ressources_factory.config_button_texture, a_context.ressources_factory.config_button_texture_hovered,
@@ -36,16 +43,11 @@ feature {NONE} -- Initialization
 			button_list.extend (config_button)
 			button_list.extend (ranking_button)
 			button_list.extend (exit_button)
+			audio_source.queue_sound_infinite_loop (audio_file)
+			audio_source.play
 		end
 
 feature {NONE} -- Implementation
-	play_sound(a_source:AUDIO_SOURCE)
-			-- Play a the source `a_source'
-		require
-			valid_audio_source: not a_source.has_error
-		do
-			a_source.play
-		end
 
 	on_click_start_button
 			-- When the `start_button' is clicked

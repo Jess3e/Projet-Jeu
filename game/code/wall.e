@@ -22,4 +22,17 @@ feature {NONE} -- Initialization
 		do
 			make_drawable(a_x, a_y, a_texture)
 		end
+
+feature -- Access
+	contact_action(a_player:PLAYER; a_direction:INTEGER_32):INTEGER_32
+			-- The action to do when the `a_player' is contacting `Current' from `a_direction'.
+			-- Returns a new direction for the player
+		do
+			Result := 0
+		end
+
+	reset
+			-- The action to do when the room is reset.
+		do
+		end
 end

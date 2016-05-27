@@ -80,16 +80,21 @@ feature -- Access
 			-- The action executed when clicking `Current'
 
 	hovered:BOOLEAN
+			-- Tells if `Current' is hovered or not
 
 	on_click
+			-- Action to do when `Current' is clicked
 		do
 			agent_click_button.call
+			audio_source.queue_sound (audio_file)
+			audio_source.play
 			if attached clicked_texture as la_clicked_texture then
 				texture := la_clicked_texture
 			end
 		end
 
 	on_mouse_in
+			-- Action to do when the mouse is over `Current'
 		do
 			if attached hovered_texture as la_hovered_texture then
 				texture := la_hovered_texture
@@ -97,6 +102,7 @@ feature -- Access
 		end
 
 	on_mouse_out
+			-- Action to do when the mouse is not longer over `Current'
 		do
 			texture := normal_texture
 		end
